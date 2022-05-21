@@ -14,8 +14,7 @@
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://indeed-lovat.vercel.app",
-        "ASSET_URL": "public",
-
+        "MIX_URL": "https://indeed-lovat.vercel.app",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
