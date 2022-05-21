@@ -4,11 +4,11 @@
             <div class="company-infos">
                 <div class="company-picture"></div>
                 <div class="infos">
-                    <h2>Company name</h2>
-                    <h3>Job name</h3>
+                    <h2>{{data.company}}</h2>
+                    <h3>{{data.title}}</h3>
                     <div class="row">
-                        <span>Locationa</span>
-                        <span>Views</span>
+                        <span>{{data.location}}</span>
+                        <span>{{data.views}}</span>
                     </div>
                     <div class="row">
                         <span>Location</span>
@@ -18,9 +18,7 @@
             </div>
 
             <div class="offer-infos">
-                <span class="team">Team</span>
-                <h3>Team Name</h3>
-                <span class="salary"><b>SALARY</b> / year</span>
+                <span class="salary" v-if="data.salary > 0"><b>{{data.salary}}€</b> / an</span>
             </div>
         </div>
 
@@ -36,7 +34,11 @@
 <script>
 export default {
     name: "Offer",
+    props: [
+        "data"
+    ]
 };
+
 </script>
 
 <style lang="scss" scoped>
@@ -95,6 +97,7 @@ export default {
                 .row {
                     margin: 5px 0;
                     display: flex;
+                    gap: 1rem;
                 }
             }
         }

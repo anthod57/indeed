@@ -1,34 +1,7 @@
 <template lang="">
     <section class="offers-container">
         <div class="wrapper">
-            <Offer class="active" />
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
-            <Offer></Offer>
+            <Offer v-for="(offer, index) in offers" :data="offer" :key="index"/>
         </div>
     </section>
 </template>
@@ -39,6 +12,28 @@ export default {
     name: 'OffersContainer',
     components: {
         Offer
+    },
+
+    data() {
+        return {
+            offers: [],
+        }
+    },
+
+    async created() {
+            this.offers = await this.getOffers();
+            console.log(this.offers);
+    },
+
+    methods: {
+        async getOffers() {
+            const data = fetch('/api/offers')
+            .then(response => response.json())
+            .then(data => { return data })
+            .catch(error => console.log(error));
+
+            return data;
+        }
     }
 }
 

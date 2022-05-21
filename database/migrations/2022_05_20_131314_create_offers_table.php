@@ -19,6 +19,9 @@ class CreateOffersTable extends Migration
             $table->string('company');
             $table->integer('type');
             $table->string('description');
+            $table->string('location');
+            $table->integer('views')->default(0);
+            $table->integer('salary')->default(0);
             $table->timestamps();
         });
     }

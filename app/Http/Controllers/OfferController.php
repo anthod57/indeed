@@ -86,6 +86,8 @@ class OfferController extends Controller
         $newOffer -> title = $request -> offer['title'];
         $newOffer -> company = $request -> offer['company'];
         $newOffer -> type = $request -> offer['type'];
+        $newOffer -> location = $request -> offer['location'];
+        $newOffer -> salary = $request -> offer['salary'];
         $newOffer -> description = $request -> offer['description'];
         $newOffer -> save();
 

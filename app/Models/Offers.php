@@ -9,5 +9,5 @@ class Offers extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'company', 'description', 'type'];
+    protected $fillable = ['title', 'company', 'description', 'type', 'location', 'views', 'salary'];
 }
