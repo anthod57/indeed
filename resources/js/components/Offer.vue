@@ -7,7 +7,7 @@
                     <h2>Company name</h2>
                     <h3>Job name</h3>
                     <div class="row">
-                        <span>Location</span>
+                        <span>Locationa</span>
                         <span>Views</span>
                     </div>
                     <div class="row">
