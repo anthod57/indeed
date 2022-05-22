@@ -3,11 +3,9 @@
     <main>
         <div class="page">
             <Searchbar @setOffers="updateOffers($event)"></Searchbar>
-            <OffersContainer :offers="offers"></OffersContainer>
+            <OffersContainer :offers="offers" @setActiveOffer="updateActiveOffer($event)"></OffersContainer>
         </div>
-        <div class="sidebar">
-            <Navbar />
-        </div>
+        <Sidebar :offer="offers[activeOffer]" :show="showSidebar" @setSidebarShow="setSidebarShow($event)" />
     </main>
     <!-- <main>
         <Searchbar @changename="myName = $event"></Searchbar>
@@ -22,23 +20,26 @@
 import Navbar from './components/Navbar.vue';
 import Searchbar from './components/Searchbar.vue';
 import OffersContainer from './components/OffersContainer.vue';
+import Sidebar from './components/Sidebar.vue';
 import axios from 'axios';
 export default {
     components: {
-        Navbar,
+        Navbar, 
         Searchbar,
-        OffersContainer
+        OffersContainer,
+        Sidebar
     },
 
     data() {
         return {
             offers: [],
+            activeOffer: -1,
+            showSidebar: false
         };
     },
 
     async mounted() {
         this.offers = await this.getLastOffers();
-        console.log(this.offers);
     },
 
     methods: {
@@ -53,6 +54,15 @@ export default {
             .catch(error => console.log(error));
 
             return data;
+        },
+
+        updateActiveOffer(event){
+            this.activeOffer = event;
+            this.showSidebar = true;
+        },
+
+        setSidebarShow(event){
+            this.showSidebar = event;
         }
     }
 }
@@ -78,21 +88,12 @@ export default {
         align-items: center;
         justify-content: flex-start;
         height: calc(100% - 5rem);
-        width: 100%;
+        flex-grow: 1;
         margin-top: 5rem;
         padding: 0 2vw;
     }
 
-    .sidebar {
-        width: 25vw;
-        height: 100%;
-    }
-
     @media screen and (max-width: 1024px) {
-        .sidebar {
-            display: none;
-        }
-
         main {
             width: 100%;
         }

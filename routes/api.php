@@ -19,10 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/', function() {
-    return view('welcome');
-});
-
 Route::get('/offers', [OfferController::class, 'index']);
 Route::get('/offers/{id}', [OfferController::class, 'show']);
 Route::post('/offers', [OfferController::class, 'store']);

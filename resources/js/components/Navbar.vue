@@ -228,7 +228,7 @@ export default {
                     margin: 0 1rem;
 
                     span {
-                        color: #505DF1;
+                        color: #5D618A;
                     }
 
                     .display-name {

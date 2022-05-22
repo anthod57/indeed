@@ -1,14 +1,26 @@
 <template lang="">
-    <div class="offer">
+    <div v-bind:class="{'offer active': isActive, 'offer': !isActive }">
         <div class="wrapper">
             <div class="company-infos">
                 <div class="company-picture"></div>
                 <div class="infos">
-                    <h2>{{data.company}}</h2>
-                    <h3>{{data.title}}</h3>
+                    <h2>{{ data.company }}</h2>
+                    <h3>{{ data.title }}</h3>
                     <div class="row">
-                        <span>{{data.location}}</span>
-                        <span>{{data.views}}</span>
+                        <span>
+                            <font-awesome-icon
+                                class="icon"
+                                :icon="['fas', 'location-dot']"
+                            />
+                            {{ data.location }}
+                        </span>
+                        <span>
+                            <font-awesome-icon
+                                class="icon"
+                                :icon="['fas', 'eye']"
+                            />
+                            {{ data.views }}
+                        </span>
                     </div>
                     <div class="row">
                         <span>Location</span>
@@ -18,15 +30,14 @@
             </div>
 
             <div class="offer-infos">
-                <span class="salary" v-if="data.salary > 0"><b>{{data.salary}}€</b> / an</span>
+                <span class="salary" v-if="data.salary > 0"
+                    ><b>{{ data.salary }}€</b> / an</span
+                >
             </div>
         </div>
 
         <div class="offer-more">
-            <font-awesome-icon
-                class="icon"
-                :icon="['fas', 'ellipsis-v']"
-            />
+            <font-awesome-icon class="icon" :icon="['fas', 'ellipsis-v']" />
         </div>
     </div>
 </template>
@@ -35,14 +46,16 @@
 export default {
     name: "Offer",
     props: [
-        "data"
-    ]
+        "data",
+        "isActive"
+    ],
 };
 
 </script>
 
 <style lang="scss" scoped>
 .offer {
+    cursor: pointer;
     max-width: 800px;
     height: 200px;
     background-color: #f8f8fc;
@@ -50,7 +63,7 @@ export default {
     margin: auto;
     padding: 1.5rem;
     border: 2px solid transparent;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.15s ease-in-out;
     position: relative;
     margin: 1rem auto;
 
@@ -64,7 +77,6 @@ export default {
         display: flex;
         justify-content: space-between;
         gap: 1rem;
-
 
         .company-picture {
             width: 33%;
@@ -84,10 +96,10 @@ export default {
             gap: 1rem;
 
             .infos {
-                color: #505df1;
+                color: #5D618A;
 
                 h2 {
-                    color: #4d484e;
+                    color: #3b3b3b;
                 }
 
                 h3 {
@@ -98,6 +110,17 @@ export default {
                     margin: 5px 0;
                     display: flex;
                     gap: 1rem;
+
+                    span {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 4px;
+                    }
+
+                    svg {
+                        font-size: 0.8rem;
+                    }
                 }
             }
         }
@@ -133,10 +156,8 @@ export default {
         top: 1rem;
         right: 1rem;
         background-color: #a4a4ab;
-        width: 2vw;
-        height: 2vw;
-        max-width: 25px;
-        max-height: 25px;
+        width: 20px;
+        height: 20px;
         color: white;
         display: flex;
         justify-content: center;
@@ -158,7 +179,6 @@ export default {
                 }
 
                 .infos {
-
                     h2 {
                         font-size: 1.25rem;
                     }
@@ -190,7 +210,6 @@ export default {
     @media screen and (max-width: 330px) {
         .wrapper {
             .company-infos {
-
                 .company-picture {
                     display: none;
                 }

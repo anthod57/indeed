@@ -1,7 +1,7 @@
 <template lang="">
     <section class="offers-container">
         <div class="wrapper">
-            <Offer v-for="(offer, index) in offers" :data="offer" :key="index"/>
+            <Offer v-for="(offer, index) in offers" :data="offer" :key="index" :isActive="index === activeOffer" v-on:click="onOfferClick(index)" />
         </div>
     </section>
 </template>
@@ -16,7 +16,20 @@ export default {
 
     props: [
         'offers'
-    ]
+    ],
+
+    data() {
+        return {
+            activeOffer: -1
+        }
+    },
+
+    methods: {
+        onOfferClick(index) {
+            this.activeOffer = index;
+            this.$emit("setActiveOffer", this.activeOffer)
+        }
+    }
 }
 
 </script>
