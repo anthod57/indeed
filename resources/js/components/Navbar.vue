@@ -118,8 +118,8 @@ export default {
 
     .mobile-menu-button {
         position: fixed;
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 50px;
+        height: 50px;
         top: 1rem;
         left: 1rem;
         font-size: 2.5rem;

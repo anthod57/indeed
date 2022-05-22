@@ -1,8 +1,8 @@
 <template lang="">
     <Navbar />
     <main>
-        <div class="page">
-            <Searchbar @setOffers="updateOffers($event)"></Searchbar>
+        <div v-bind:class="{'page': !searchBarFocused, 'page search-bar-focused': searchBarFocused}">
+            <Searchbar @setOffers="updateOffers($event)" @focused="searchBarFocused = $event"></Searchbar>
             <OffersContainer :offers="offers" @setActiveOffer="updateActiveOffer($event)" @sortOffers="sortOffers($event)"></OffersContainer>
         </div>
         <Sidebar :offer="offers[activeOffer]" :show="showSidebar" @setSidebarShow="setSidebarShow($event)" />
@@ -36,7 +36,8 @@ export default {
             offers: [],
             activeOffer: -1,
             showSidebar: false,
-            selectedFilter: 0
+            selectedFilter: 0,
+            searchBarFocused: false
         };
     },
 
@@ -125,8 +126,13 @@ export default {
         }
 
         .page {
-            height: calc(100% - 3rem);
-            margin-top: 3rem;
+            height: 100%;
+            margin-top: 0;
+            transition: 0.5s all;
+
+            &.search-bar-focused {
+                margin-top: 3.5rem;
+            }
         }
     }   
 </style>

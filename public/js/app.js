@@ -34342,7 +34342,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       offers: [],
       activeOffer: -1,
       showSidebar: false,
-      selectedFilter: 0
+      selectedFilter: 0,
+      searchBarFocused: false
     };
   },
   mounted: function mounted() {
@@ -34551,7 +34552,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       keywords: '',
-      showFilters: false
+      showFilters: false,
+      searchbarFocused: false
     };
   },
   methods: {
@@ -34592,6 +34594,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    handleSearchbarFocus: function handleSearchbarFocus(focused) {
+      this.$emit('focused', focused);
+      this.searchbarFocused = focused;
     }
   }
 });
@@ -34640,14 +34646,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _withScopeId = function _withScopeId(n) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-f348271a"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
-};
-
-var _hoisted_1 = {
-  "class": "page"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Navbar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Navbar");
 
@@ -34657,24 +34655,34 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_Sidebar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Sidebar");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Navbar), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Searchbar, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Navbar), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+      'page': !$data.searchBarFocused,
+      'page search-bar-focused': $data.searchBarFocused
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Searchbar, {
     onSetOffers: _cache[0] || (_cache[0] = function ($event) {
       return $options.updateOffers($event);
+    }),
+    onFocused: _cache[1] || (_cache[1] = function ($event) {
+      return $data.searchBarFocused = $event;
     })
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OffersContainer, {
     offers: $data.offers,
-    onSetActiveOffer: _cache[1] || (_cache[1] = function ($event) {
+    onSetActiveOffer: _cache[2] || (_cache[2] = function ($event) {
       return $options.updateActiveOffer($event);
     }),
-    onSortOffers: _cache[2] || (_cache[2] = function ($event) {
+    onSortOffers: _cache[3] || (_cache[3] = function ($event) {
       return $options.sortOffers($event);
     })
   }, null, 8
   /* PROPS */
-  , ["offers"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
+  , ["offers"])], 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
     offer: $data.offers[$data.activeOffer],
     show: $data.showSidebar,
-    onSetSidebarShow: _cache[3] || (_cache[3] = function ($event) {
+    onSetSidebarShow: _cache[4] || (_cache[4] = function ($event) {
       return $options.setSidebarShow($event);
     })
   }, null, 8
@@ -35017,20 +35025,17 @@ var _hoisted_1 = {
   "class": "searchbar-container"
 };
 var _hoisted_2 = {
-  "class": "searchbar"
-};
-var _hoisted_3 = {
   "class": "filter-button"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "text",
   placeholder: "Entreprise"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "text",
   placeholder: "Ville"
 }, null, -1
@@ -35042,7 +35047,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_v_select = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("v-select");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+      'searchbar': !$data.searchbarFocused,
+      'searchbar focused': $data.searchbarFocused
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "keywords",
     placeholder: "Métier, mots-clés ou entreprise",
@@ -35051,14 +35061,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     onKeyup: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $options.searchOffers();
-    }, ["enter"]))
+    }, ["enter"])),
+    onFocus: _cache[2] || (_cache[2] = function ($event) {
+      return $options.handleSearchbarFocus(true);
+    }),
+    onBlur: _cache[3] || (_cache[3] = function ($event) {
+      return $options.handleSearchbarFocus(false);
+    })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.keywords]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.keywords]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
     icon: ['fas', 'sliders']
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "search-button",
-    onClick: _cache[2] || (_cache[2] = function ($event) {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.searchOffers();
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
@@ -35068,9 +35084,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'filter-container show': $data.showFilters,
       'filter-container': !$data.showFilters
     })
-  }, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_v_select, {
+  }, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_v_select, {
     modelValue: _ctx.sortBy,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return _ctx.sortBy = $event;
     }),
     reduce: function reduce(option) {
@@ -35093,9 +35109,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }]
   }, null, 8
   /* PROPS */
-  , ["modelValue", "reduce"]), _hoisted_5], 2
+  , ["modelValue", "reduce"]), _hoisted_4], 2
   /* CLASS */
-  )])]);
+  )], 2
+  /* CLASS */
+  )]);
 }
 
 /***/ }),
@@ -35280,7 +35298,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_styles_app_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "main[data-v-f348271a] {\n  display: flex;\n  height: 100%;\n  align-items: flex-start;\n  justify-content: space-between;\n  width: 75vw;\n  overflow: hidden;\n  margin: 0;\n}\n.page[data-v-f348271a] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start;\n  height: calc(100% - 5rem);\n  flex-grow: 1;\n  margin-top: 5rem;\n  padding: 0 2vw;\n}\n@media screen and (max-width: 1024px) {\nmain[data-v-f348271a] {\n    width: 100%;\n}\n.page[data-v-f348271a] {\n    height: calc(100% - 3rem);\n    margin-top: 3rem;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "main[data-v-f348271a] {\n  display: flex;\n  height: 100%;\n  align-items: flex-start;\n  justify-content: space-between;\n  width: 75vw;\n  overflow: hidden;\n  margin: 0;\n}\n.page[data-v-f348271a] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start;\n  height: calc(100% - 5rem);\n  flex-grow: 1;\n  margin-top: 5rem;\n  padding: 0 2vw;\n}\n@media screen and (max-width: 1024px) {\nmain[data-v-f348271a] {\n    width: 100%;\n}\n.page[data-v-f348271a] {\n    height: 100%;\n    margin-top: 0;\n    transition: 0.5s all;\n}\n.page.search-bar-focused[data-v-f348271a] {\n    margin-top: 3.5rem;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35304,7 +35322,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".navbar-container {\n  background-color: #f8f8fc;\n  height: 100%;\n  width: 25vw;\n  color: black;\n}\n.navbar-container .mobile-menu-button {\n  position: fixed;\n  width: 2.5rem;\n  height: 2.5rem;\n  top: 1rem;\n  left: 1rem;\n  font-size: 2.5rem;\n  display: none;\n  justify-content: center;\n  align-items: center;\n  z-index: 11;\n  color: #505DF1;\n}\n.navbar-container .mobile-menu-button .open, .navbar-container .mobile-menu-button .close {\n  position: absolute;\n  transition: 0.25s all;\n}\n.navbar-container .navbar-wrapper {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  height: 100%;\n  padding: 1rem 2vw;\n}\n.navbar-container .navbar-wrapper .logo {\n  width: 100%;\n  height: 200px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.navbar-container .navbar-wrapper .logo h2 {\n  text-align: center;\n  font-size: 2.5rem;\n}\n.navbar-container .navbar-wrapper .menu {\n  width: 100%;\n  height: 100%;\n  padding: 1rem;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  align-items: flex-start;\n}\n.navbar-container .navbar-wrapper .menu .top, .navbar-container .navbar-wrapper .menu .bottom {\n  width: 100%;\n}\n.navbar-container .navbar-wrapper .menu ul {\n  list-style: none;\n  -webkit-margin-before: 0;\n          margin-block-start: 0;\n  -webkit-margin-after: 0;\n          margin-block-end: 0;\n  -webkit-padding-start: 0;\n          padding-inline-start: 0;\n  font-size: 1rem;\n}\n.navbar-container .navbar-wrapper .menu li {\n  color: #4d484e;\n  margin: 3vh 0;\n  display: flex;\n  align-items: center;\n  transition: 0.5s all;\n}\n.navbar-container .navbar-wrapper .menu li .icon {\n  margin: 0 1rem;\n  font-size: 1.25rem;\n}\n.navbar-container .navbar-wrapper .menu li.active {\n  color: #505DF1;\n  font-weight: 700;\n}\n.navbar-container .navbar-wrapper .menu .user-box {\n  width: 100%;\n  height: 100px;\n  max-width: 400px;\n  margin: auto;\n  border: 2px solid #dbdbdb;\n  border-radius: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 1rem;\n  position: relative;\n  transition: all 0.5s ease-in-out;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture {\n  width: 33%;\n  min-width: 25px;\n  max-width: 60px;\n  aspect-ratio: 1/1;\n  border: 1px solid black;\n  border-radius: 50%;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-content: center;\n  width: 100%;\n  height: 100%;\n  margin: 0 1rem;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos span {\n  color: #5D618A;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos .display-name {\n  font-weight: 700;\n  color: #1421b5;\n}\n.navbar-container .navbar-wrapper .menu .user-more {\n  cursor: pointer;\n  position: absolute;\n  border-radius: 50%;\n  top: 0.5rem;\n  right: 0.5rem;\n  background-color: #A4A4AB;\n  width: 20px;\n  height: 20px;\n  color: white;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 0.8rem;\n}\n.navbar-container .navbar-wrapper .menu .more-menu {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #f8f8fc;\n  bottom: 100%;\n  left: 5%;\n  right: 5%;\n  overflow: hidden;\n  text-align: center;\n  border: 2px solid #dbdbdb;\n  border-bottom: 0px;\n  border-radius: 10px 10px 0 0;\n  transform-origin: bottom;\n  transition: all 0.5s ease-in-out;\n  z-index: 20;\n}\n@media screen and (max-width: 1024px) {\n.navbar-container {\n    position: fixed;\n    z-index: 10;\n    left: -180%;\n    width: auto;\n    overflow: hidden;\n    transition: 0.5s all;\n}\n.navbar-container .mobile-menu-button {\n    display: flex;\n    opacity: 1;\n}\n.navbar-container .navbar-wrapper {\n    opacity: 0;\n}\n.navbar-container.show {\n    left: 0;\n}\n.navbar-container.show .navbar-wrapper {\n    opacity: 1;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".navbar-container {\n  background-color: #f8f8fc;\n  height: 100%;\n  width: 25vw;\n  color: black;\n}\n.navbar-container .mobile-menu-button {\n  position: fixed;\n  width: 50px;\n  height: 50px;\n  top: 1rem;\n  left: 1rem;\n  font-size: 2.5rem;\n  display: none;\n  justify-content: center;\n  align-items: center;\n  z-index: 11;\n  color: #505DF1;\n}\n.navbar-container .mobile-menu-button .open, .navbar-container .mobile-menu-button .close {\n  position: absolute;\n  transition: 0.25s all;\n}\n.navbar-container .navbar-wrapper {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  height: 100%;\n  padding: 1rem 2vw;\n}\n.navbar-container .navbar-wrapper .logo {\n  width: 100%;\n  height: 200px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.navbar-container .navbar-wrapper .logo h2 {\n  text-align: center;\n  font-size: 2.5rem;\n}\n.navbar-container .navbar-wrapper .menu {\n  width: 100%;\n  height: 100%;\n  padding: 1rem;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  align-items: flex-start;\n}\n.navbar-container .navbar-wrapper .menu .top, .navbar-container .navbar-wrapper .menu .bottom {\n  width: 100%;\n}\n.navbar-container .navbar-wrapper .menu ul {\n  list-style: none;\n  -webkit-margin-before: 0;\n          margin-block-start: 0;\n  -webkit-margin-after: 0;\n          margin-block-end: 0;\n  -webkit-padding-start: 0;\n          padding-inline-start: 0;\n  font-size: 1rem;\n}\n.navbar-container .navbar-wrapper .menu li {\n  color: #4d484e;\n  margin: 3vh 0;\n  display: flex;\n  align-items: center;\n  transition: 0.5s all;\n}\n.navbar-container .navbar-wrapper .menu li .icon {\n  margin: 0 1rem;\n  font-size: 1.25rem;\n}\n.navbar-container .navbar-wrapper .menu li.active {\n  color: #505DF1;\n  font-weight: 700;\n}\n.navbar-container .navbar-wrapper .menu .user-box {\n  width: 100%;\n  height: 100px;\n  max-width: 400px;\n  margin: auto;\n  border: 2px solid #dbdbdb;\n  border-radius: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 1rem;\n  position: relative;\n  transition: all 0.5s ease-in-out;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture {\n  width: 33%;\n  min-width: 25px;\n  max-width: 60px;\n  aspect-ratio: 1/1;\n  border: 1px solid black;\n  border-radius: 50%;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-content: center;\n  width: 100%;\n  height: 100%;\n  margin: 0 1rem;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos span {\n  color: #5D618A;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos .display-name {\n  font-weight: 700;\n  color: #1421b5;\n}\n.navbar-container .navbar-wrapper .menu .user-more {\n  cursor: pointer;\n  position: absolute;\n  border-radius: 50%;\n  top: 0.5rem;\n  right: 0.5rem;\n  background-color: #A4A4AB;\n  width: 20px;\n  height: 20px;\n  color: white;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 0.8rem;\n}\n.navbar-container .navbar-wrapper .menu .more-menu {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #f8f8fc;\n  bottom: 100%;\n  left: 5%;\n  right: 5%;\n  overflow: hidden;\n  text-align: center;\n  border: 2px solid #dbdbdb;\n  border-bottom: 0px;\n  border-radius: 10px 10px 0 0;\n  transform-origin: bottom;\n  transition: all 0.5s ease-in-out;\n  z-index: 20;\n}\n@media screen and (max-width: 1024px) {\n.navbar-container {\n    position: fixed;\n    z-index: 10;\n    left: -180%;\n    width: auto;\n    overflow: hidden;\n    transition: 0.5s all;\n}\n.navbar-container .mobile-menu-button {\n    display: flex;\n    opacity: 1;\n}\n.navbar-container .navbar-wrapper {\n    opacity: 0;\n}\n.navbar-container.show {\n    left: 0;\n}\n.navbar-container.show .navbar-wrapper {\n    opacity: 1;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35376,7 +35394,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".searchbar-container {\n  width: 100%;\n  height: 50px;\n  margin: 1rem auto;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  max-width: 800px;\n  position: relative;\n}\n.searchbar-container .searchbar {\n  background-color: #f8f8fc;\n  border-radius: 30px;\n  height: 50px;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1019607843);\n}\n.searchbar-container .searchbar input {\n  padding: 0.5rem 1rem;\n  background: transparent;\n}\n.searchbar-container .searchbar .keywords {\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n}\n.searchbar-container .filter-button {\n  height: 50px;\n  width: 50px;\n  background-color: transparent;\n  color: #4D484E;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 1.2rem;\n  cursor: pointer;\n  flex-shrink: 0;\n}\n.searchbar-container .search-button {\n  cursor: pointer;\n  background-color: #505DF1;\n  color: #f8f8fc;\n  height: 50px;\n  width: 60px;\n  border-radius: 0 30px 30px 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 1.2rem;\n  flex-shrink: 0;\n}\n.searchbar-container .filter-container {\n  background-color: #f8f8fc;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  position: absolute;\n  width: 0px;\n  transition: 0.5s all;\n  right: 110px;\n  height: 100%;\n  border-radius: 30px 0 0 30px;\n  gap: 0.5rem;\n  overflow: hidden;\n  opacity: 0;\n}\n.searchbar-container .filter-container.show {\n  padding: 0.5rem 1rem;\n  opacity: 1;\n  overflow: unset;\n  width: calc(100% - 110px);\n}\n.searchbar-container .filter-container input {\n  border-right: 1px solid rgba(164, 164, 171, 0.5);\n}\n.searchbar-container .filter-container input:last-child {\n  border: none;\n}\n.searchbar-container .filter-container .v-select {\n  border-right: 1px solid rgba(164, 164, 171, 0.5);\n  z-index: 5;\n}\n.searchbar-container .filter-container .v-select input {\n  padding: 0;\n  height: 23px;\n  width: 100% !important;\n}\n.searchbar-container .filter-container .vs__dropdown-toggle {\n  z-index: 2;\n  background-color: #f8f8fc !important;\n  border: none !important;\n  border-radius: 20px !important;\n  padding: 0 0.5rem !important;\n  padding-bottom: 4px !important;\n}\n.searchbar-container .filter-container .vs__selected-options {\n  justify-content: flex-start;\n  align-items: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".searchbar-container {\n  width: 100%;\n  height: 50px;\n  margin: 1rem auto;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  max-width: 800px;\n  position: relative;\n}\n.searchbar-container .searchbar {\n  background-color: #f8f8fc;\n  border-radius: 30px;\n  height: 50px;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1019607843);\n}\n.searchbar-container .searchbar input {\n  padding: 0.5rem 1rem;\n  background: transparent;\n}\n.searchbar-container .searchbar .keywords {\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n}\n.searchbar-container .filter-button {\n  height: 50px;\n  width: 50px;\n  background-color: transparent;\n  color: #4D484E;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 1.2rem;\n  cursor: pointer;\n  flex-shrink: 0;\n}\n.searchbar-container .search-button {\n  cursor: pointer;\n  background-color: #505DF1;\n  color: #f8f8fc;\n  height: 50px;\n  width: 60px;\n  border-radius: 0 30px 30px 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 1.2rem;\n  flex-shrink: 0;\n}\n.searchbar-container .filter-container {\n  background-color: #f8f8fc;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  position: absolute;\n  width: 0px;\n  transition: 0.5s all;\n  right: 110px;\n  height: 100%;\n  border-radius: 30px 0 0 30px;\n  gap: 0.5rem;\n  overflow: hidden;\n  opacity: 0;\n}\n.searchbar-container .filter-container.show {\n  padding: 0.5rem 1rem;\n  opacity: 1;\n  overflow: unset;\n  width: calc(100% - 110px);\n}\n.searchbar-container .filter-container input {\n  border-right: 1px solid rgba(164, 164, 171, 0.5);\n}\n.searchbar-container .filter-container input:last-child {\n  border: none;\n}\n.searchbar-container .filter-container .v-select {\n  border-right: 1px solid rgba(164, 164, 171, 0.5);\n  z-index: 5;\n}\n.searchbar-container .filter-container .v-select input {\n  padding: 0;\n  height: 23px;\n  width: 100% !important;\n}\n.searchbar-container .filter-container .vs__dropdown-toggle {\n  z-index: 2;\n  background-color: #f8f8fc !important;\n  border: none !important;\n  border-radius: 20px !important;\n  padding: 0 0.5rem !important;\n  padding-bottom: 4px !important;\n}\n.searchbar-container .filter-container .vs__selected-options {\n  justify-content: flex-start;\n  align-items: center;\n}\n@media screen and (max-width: 1024px) {\n.searchbar-container .searchbar {\n    margin-left: calc(50px + 1rem);\n    transition: 0.6s all;\n    width: 100%;\n}\n.searchbar-container .searchbar.focused {\n    margin-left: 0;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

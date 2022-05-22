@@ -1,7 +1,7 @@
 <template lang="">
     <section class="searchbar-container">
-        <div class="searchbar">
-            <input type="text" class="keywords" placeholder="Métier, mots-clés ou entreprise" v-model="keywords" v-on:keyup.enter="searchOffers()" />
+        <div v-bind:class="{'searchbar': !searchbarFocused, 'searchbar focused': searchbarFocused}">
+            <input type="text" class="keywords" placeholder="Métier, mots-clés ou entreprise" v-model="keywords" v-on:keyup.enter="searchOffers()"  v-on:focus="handleSearchbarFocus(true)" v-on:blur="handleSearchbarFocus(false)"/>
             <div class="filter-button">
                 <font-awesome-icon :icon="['fas', 'sliders']" />
             </div>
@@ -32,7 +32,8 @@ export default {
     data() {
         return {
             keywords: '',
-            showFilters: false
+            showFilters: false,
+            searchbarFocused: false
         }
     },
 
@@ -52,6 +53,11 @@ export default {
             .catch(error => console.log(error));
 
             this.$emit("setOffers", data);
+        },
+        
+        handleSearchbarFocus(focused) {
+            this.$emit('focused', focused)
+            this.searchbarFocused = focused;
         }
     },
 }
@@ -172,6 +178,20 @@ export default {
             .vs__selected-options {
                 justify-content: flex-start;
                 align-items: center;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1024px) {
+        .searchbar-container {
+            .searchbar {
+                margin-left: calc(50px + 1rem);
+                transition: 0.6s all;
+                width: 100%;
+
+                &.focused {
+                    margin-left: 0;
+                }
             }
         }
     }
