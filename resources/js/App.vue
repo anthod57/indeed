@@ -3,7 +3,7 @@
     <main>
         <div class="page">
             <Searchbar @setOffers="updateOffers($event)"></Searchbar>
-            <OffersContainer :offers="offers" @setActiveOffer="updateActiveOffer($event)"></OffersContainer>
+            <OffersContainer :offers="offers" @setActiveOffer="updateActiveOffer($event)" @sortOffers="sortOffers($event)"></OffersContainer>
         </div>
         <Sidebar :offer="offers[activeOffer]" :show="showSidebar" @setSidebarShow="setSidebarShow($event)" />
     </main>
@@ -22,6 +22,7 @@ import Searchbar from './components/Searchbar.vue';
 import OffersContainer from './components/OffersContainer.vue';
 import Sidebar from './components/Sidebar.vue';
 import axios from 'axios';
+import moment from 'moment';
 export default {
     components: {
         Navbar, 
@@ -34,17 +35,20 @@ export default {
         return {
             offers: [],
             activeOffer: -1,
-            showSidebar: false
+            showSidebar: false,
+            selectedFilter: 0
         };
     },
 
     async mounted() {
         this.offers = await this.getLastOffers();
+        this.sortOffers(this.selectedFilter)
     },
 
     methods: {
         updateOffers(event) {
             this.offers = event;
+            this.sortOffers(this.selectedFilter)
         },
 
         async getLastOffers() {
@@ -52,7 +56,7 @@ export default {
             .then(response => response.data)
             .then(data => { return data })
             .catch(error => console.log(error));
-
+        
             return data;
         },
 
@@ -63,6 +67,28 @@ export default {
 
         setSidebarShow(event){
             this.showSidebar = event;
+        },
+
+        sortOffers(value){
+            this.selectedFilter = value;
+
+            switch(value){
+                case 0: // Newest
+                    this.offers = this.offers.sort((a, b) => moment(b.updated_at).unix() - moment(a.updated_at).unix());
+                    break;
+
+                case 1: // Oldest
+                    this.offers = this.offers.sort((a, b) => moment(a.updated_at).unix() - moment(b.updated_at).unix());
+                    break;
+
+                case 2: // Most viewed
+                    this.offers = this.offers.sort((a, b) => b.views - a.views);
+                    break;
+
+                case 3: // Least viewed;
+                    this.offers = this.offers.sort((a, b) => a.views - b.views);
+                    break;
+            }
         }
     }
 }

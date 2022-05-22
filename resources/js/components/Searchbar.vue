@@ -8,6 +8,18 @@
             <div class="search-button" v-on:click="searchOffers()">
                 <font-awesome-icon :icon="['fas', 'search']" />
             </div>
+            <div v-bind:class="{'filter-container show': showFilters, 'filter-container': !showFilters}">
+                <input type="text" placeholder="Entreprise">
+
+                <v-select v-model="sortBy" :reduce="(option) => option.id" id="sort" name="sort" :options="[
+                    {label: 'CDD', id: 0},
+                    {label: 'CDI', id: 1},
+                    {label: 'Alternance', id: 2},
+                    {label: 'Stage', id: 3}
+                ]"></v-select>
+
+                <input type="text" placeholder="Ville"> 
+            </div>
         </div>
     </section>
 </template>
@@ -19,7 +31,8 @@ export default {
 
     data() {
         return {
-            keywords: ''
+            keywords: '',
+            showFilters: false
         }
     },
 
@@ -45,7 +58,7 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
     .searchbar-container {
         width: 100%;
@@ -55,6 +68,7 @@ export default {
         justify-content: center;
         align-items: center;
         max-width: 800px;
+        position: relative;
 
         .searchbar {
             background-color: #f8f8fc;
@@ -88,6 +102,7 @@ export default {
             justify-content: center;
             font-size: 1.2rem;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .search-button {
@@ -95,13 +110,70 @@ export default {
             background-color: #505DF1;
             color: #f8f8fc;
             height: 50px;
-            width: 70px;
+            width: 60px;
             border-radius: 0 30px 30px 0;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+            flex-shrink: 0;
         } 
+
+        .filter-container {
+            background-color: #f8f8fc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 0px;
+            transition: 0.5s all;
+            right: 110px;
+            height: 100%;
+            border-radius: 30px 0 0 30px;
+            gap: 0.5rem;
+            overflow: hidden;
+            opacity: 0;
+
+            &.show {
+                padding: 0.5rem 1rem;
+                opacity: 1;
+                overflow: unset;
+                width: calc(100% - 110px);
+            }
+
+            input {
+                border-right: 1px solid rgba(164, 164, 171, 0.50);
+
+                &:last-child {
+                    border: none;
+                }
+            }
+
+            .v-select {
+                border-right: 1px solid rgba(164, 164, 171, 0.50);
+                z-index: 5;
+
+                input {
+                    padding: 0;
+                    height: 23px;
+                    width: 100% !important;
+                }
+            }
+
+            .vs__dropdown-toggle {
+                z-index: 2;
+                background-color: #f8f8fc !important;
+                border: none !important;
+                border-radius: 20px !important;
+                padding: 0 0.5rem !important;
+                padding-bottom: 4px !important;
+            }
+
+            .vs__selected-options {
+                justify-content: flex-start;
+                align-items: center;
+            }
+        }
     }
 
 </style>

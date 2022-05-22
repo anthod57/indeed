@@ -25,7 +25,7 @@ class OfferController extends Controller
         if($request->has('type')){
             $offers = $offers->filter(function ($offer) use ($request){
                 return $offer->type === $request->type;
-            });
+            })->values();;
         }
 
         /*
@@ -36,7 +36,7 @@ class OfferController extends Controller
         if($request->has('company')){
             $offers = $offers->filter(function ($offer) use ($request){
                 return $offer->company === $request->company;
-            });
+            })->values();;
         }
 
         /*
@@ -50,7 +50,7 @@ class OfferController extends Controller
                 $offers = $offers->filter(function ($offer) use ($keyword){
                     $normalizedKeyword = $this->convertStringToNormal($keyword);
                     return str_contains($this->convertStringToNormal($offer->title), $normalizedKeyword) || str_contains($this->convertStringToNormal($offer->description), $normalizedKeyword) || str_contains($this->convertStringToNormal($offer->company), $normalizedKeyword);
-                });
+                })->values();
             }
         }
 
