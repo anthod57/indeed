@@ -2,7 +2,7 @@
     <section class="offers-container">
         <div class="header">
             <label for="sort">Trier:</label>
-            <v-select v-model="sortBy" :reduce="(option) => option.id" id="sort" name="sort" :options="[
+            <v-select :searchable="false" v-model="sortBy" :reduce="(option) => option.id" id="sort" name="sort" :options="[
                 {label: 'Plus récentes', id: 0},
                 {label: 'Moins récentes', id: 1},
                 {label: 'Plus populaires', id: 2},
