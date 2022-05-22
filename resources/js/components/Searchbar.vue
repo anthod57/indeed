@@ -1,11 +1,11 @@
 <template lang="">
     <section class="searchbar-container">
         <div class="searchbar">
-            <input type="text" class="keywords" placeholder="Métier, mots-clés ou entreprise" />
-            <div class="filter-button" @click="changeName()">
+            <input type="text" class="keywords" placeholder="Métier, mots-clés ou entreprise" v-model="keywords" v-on:keyup.enter="searchOffers()" />
+            <div class="filter-button">
                 <font-awesome-icon :icon="['fas', 'sliders']" />
             </div>
-            <div class="search-button" @click="changeName()">
+            <div class="search-button" v-on:click="searchOffers()">
                 <font-awesome-icon :icon="['fas', 'search']" />
             </div>
         </div>
@@ -13,12 +13,33 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: 'Searchbar',
+
+    data() {
+        return {
+            keywords: ''
+        }
+    },
+
     methods: {
-        changeName() {
-            this.$emit("changename", "John");
-        },
+        async searchOffers() {
+            const keywordsArray = this.keywords.split(' ');
+
+            const data = await axios.request({
+                method: 'GET',
+                url: '/api/offers',
+                params: {
+                    keywords: keywordsArray
+                }
+            })
+            .then((response) => response.data)
+            .then((data) => { return data })
+            .catch(error => console.log(error));
+
+            this.$emit("setOffers", data);
+        }
     },
 }
 

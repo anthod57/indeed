@@ -2,8 +2,8 @@
     <Navbar />
     <main>
         <div class="page">
-            <Searchbar @changename="myName = $event"></Searchbar>
-            <OffersContainer></OffersContainer>
+            <Searchbar @setOffers="updateOffers($event)"></Searchbar>
+            <OffersContainer :offers="offers"></OffersContainer>
         </div>
         <div class="sidebar">
             <Navbar />
@@ -22,17 +22,39 @@
 import Navbar from './components/Navbar.vue';
 import Searchbar from './components/Searchbar.vue';
 import OffersContainer from './components/OffersContainer.vue';
+import axios from 'axios';
 export default {
     components: {
         Navbar,
         Searchbar,
         OffersContainer
     },
+
     data() {
         return {
-            myName: "Alex",
+            offers: [],
         };
     },
+
+    async mounted() {
+        this.offers = await this.getLastOffers();
+        console.log(this.offers);
+    },
+
+    methods: {
+        updateOffers(event) {
+            this.offers = event;
+        },
+
+        async getLastOffers() {
+            const data = axios.get('/api/offers')
+            .then(response => response.data)
+            .then(data => { return data })
+            .catch(error => console.log(error));
+
+            return data;
+        }
+    }
 }
 
 </script>

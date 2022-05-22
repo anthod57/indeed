@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Offers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class OfferController extends Controller
 {
@@ -47,7 +48,8 @@ class OfferController extends Controller
         if($request->has('keywords')){
             foreach ($request->keywords as $keyword) {
                 $offers = $offers->filter(function ($offer) use ($keyword){
-                    return str_contains(strtolower($offer->title), strtolower($keyword)) || str_contains(strtolower($offer->description), strtolower($keyword));
+                    $normalizedKeyword = $this->convertStringToNormal($keyword);
+                    return str_contains($this->convertStringToNormal($offer->title), $normalizedKeyword) || str_contains($this->convertStringToNormal($offer->description), $normalizedKeyword) || str_contains($this->convertStringToNormal($offer->company), $normalizedKeyword);
                 });
             }
         }
@@ -140,5 +142,9 @@ class OfferController extends Controller
     public function destroy($id)
     {
         Offers::find($id)->delete();
+    }
+
+    function convertStringToNormal($string){
+        return strtolower(STR::ascii($string));
     }
 }
