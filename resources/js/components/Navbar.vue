@@ -54,15 +54,25 @@
                         <div class="user-picture">
 
                         </div>
+
                         <div class="user-infos">
                             <span class="display-name">Nom Prénom</span>
                             <span>Poste</span>
                         </div>
-                        <div class="user-more">
+
+                        <div class="user-more" v-on:click="showMoreMenu = !showMoreMenu">
                              <font-awesome-icon
                                 class="icon"
                                 :icon="['fas', 'ellipsis-v']"
                             />
+                        </div>
+
+                        <div class="more-menu" v-bind:style="{transform: showMoreMenu ? 'scaleY(1)' : 'scaleY(0)'}">
+                            <ul>
+                                <li>Hey</li>
+                                <li>Hey 2</li>
+                                <li>Hey 3</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -91,7 +101,8 @@ export default {
     name: "Navbar",
     data() {
         return {
-            showMenu: false
+            showMenu: false,
+            showMoreMenu: false
         }
     },
 };
@@ -101,7 +112,7 @@ export default {
 
 .navbar-container {
     background-color: #f8f8fc;
-    height: 100vh;
+    height: 100%;
     width: 25vw;
     color: black;
 
@@ -187,6 +198,8 @@ export default {
             .user-box {
                 width: 100%;
                 height: 100px;
+                max-width: 400px;
+                margin: auto;
                 border: 2px solid #dbdbdb;
                 border-radius: 20px;
                 display: flex;
@@ -194,6 +207,7 @@ export default {
                 align-items: center;
                 padding: 1rem;
                 position: relative;
+                transition: all 0.5s ease-in-out;
 
                 .user-picture {
                     width: 33%;
@@ -228,18 +242,36 @@ export default {
                 cursor: pointer;
                 position: absolute;
                 border-radius: 50%;
-                top: 1rem;
-                right: 1rem;
+                top: 0.5rem;
+                right: 0.5rem;
                 background-color: #A4A4AB;
-                width: 2vw;
-                height: 2vw;
-                max-width: 25px;
-                max-height: 25px;
+                width: 20px;
+                height: 20px;
                 color: white;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 font-size: 0.8rem;
+            }
+
+            
+            .more-menu {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #f8f8fc;
+                bottom: 100%;
+                left: 5%;
+                right: 5%;
+                overflow: hidden;
+                text-align: center;
+                border: 2px solid #dbdbdb;
+                border-bottom: 0px;
+                border-radius: 10px 10px 0 0;
+                transform-origin: bottom;
+                transition: all 0.5s ease-in-out;
+                z-index: 20;
             }
         }
     }

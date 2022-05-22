@@ -11,6 +11,7 @@
         <script src="{{ asset( mix('js/app.js')) }}" type="text/javascript" defer></script>
     </head>
 
+    <!-- DESIGN INSPIRED BY https://dribbble.com/shots/15369006-HuntJobs-Job-Search-Dashboard -->
     <body id="app">
         <app></app>
     </body>

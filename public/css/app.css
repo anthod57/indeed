@@ -1,1 +1,73 @@
-*,:after,:before{border:0;box-sizing:border-box;margin:0;padding:0}body{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background:#f1f1fc;color:#000;display:flex;font-family:Nunito;font-size:16px;min-height:100vh;overflow:hidden;transition:color .5s,background-color .5s;width:100%}input:focus,select:focus,textarea:focus{outline:none}::-moz-placeholder{color:#00000080}:-ms-input-placeholder{color:#00000080}::placeholder{color:#00000080}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#505df1;border-radius:20px}::-webkit-scrollbar-thumb:hover{background:#6471ff}@media screen and (min-width:1024px){body{display:flex}}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0; 
+  padding: 0; 
+  border: 0; 
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  color: black;
+  background: #F1F1FC;
+  transition: color 0.5s, background-color 0.5s;
+  font-family: 'Nunito';
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  display: flex;
+}
+
+main {
+
+}
+
+input:focus, textarea:focus, select:focus{
+    outline: none;
+}
+
+::-moz-placeholder {
+    color: #00000080;
+}
+
+:-ms-input-placeholder {
+    color: #00000080;
+}
+
+::placeholder {
+    color: #00000080;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #505DF1;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #6471ff;
+}
+
+@media screen and (min-width: 1024px) {
+    body {
+      display: flex;
+    }
+}

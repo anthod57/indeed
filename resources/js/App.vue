@@ -43,7 +43,6 @@ export default {
     main {
         display: flex;
         height: 100%;
-        min-height: 100vh;
         align-items: flex-start;
         justify-content: space-between;
         width: 75vw;
@@ -56,7 +55,7 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        height: calc(100vh - 5rem);
+        height: calc(100% - 5rem);
         width: 100%;
         margin-top: 5rem;
         padding: 0 2vw;
@@ -77,7 +76,7 @@ export default {
         }
 
         .page {
-            height: calc(100vh - 3rem);
+            height: calc(100% - 3rem);
             margin-top: 3rem;
         }
     }   
