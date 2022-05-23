@@ -7,6 +7,7 @@ import { faSearch, faHome, faBuilding, faCalculator, faUserPlus, faArrowRightToB
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
+import store from './store'
 
 
 const icons = [
@@ -25,9 +26,10 @@ const icons = [
     faBookmark
 ];
 
-
 library.add(icons);
+
 createApp(App)
-.component("font-awesome-icon", FontAwesomeIcon)
-.component('v-select', vSelect)
-.mount('#app')
+    .component("font-awesome-icon", FontAwesomeIcon)
+    .component('v-select', vSelect)
+    .use(store)
+    .mount('#app');

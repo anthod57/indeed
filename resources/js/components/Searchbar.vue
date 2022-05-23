@@ -37,6 +37,10 @@ export default {
         }
     },
 
+    mounted() {
+        this.keywords = this.$store.getters.getCurrentSearchInput;
+    },
+
     methods: {
         async searchOffers() {
             const keywordsArray = this.keywords.split(' ');
@@ -53,12 +57,13 @@ export default {
             .catch(error => console.log(error));
 
             this.$emit("setOffers", data);
+            this.$store.commit("setCurrentSearchInput", this.keywords);
         },
         
         handleSearchbarFocus(focused) {
             this.$emit('focused', focused)
             this.searchbarFocused = focused;
-        }
+        },
     },
 }
 

@@ -51,10 +51,10 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('RDS_HOSTNAME', '127.0.0.1'),
+            'host' => env('RDS_HOSTNAME', env('DB_HOST', '127.0.0.1')),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('RDS_DB_NAME', 'forge'),
-            'username' => env('RDS_USERNAME', 'forge'),
+            'database' => env('RDS_DB_NAME', env('DB_DATABASE', 'forge')),
+            'username' => env('RDS_USERNAME', env('DB_USERNAME', 'root')),
             'password' => env('RDS_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',

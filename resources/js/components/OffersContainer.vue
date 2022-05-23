@@ -10,7 +10,7 @@
             ]"></v-select>
         </div>
         <div class="wrapper">
-            <Offer v-for="(offer, index) in offers" :data="offer" :key="index" :isActive="index === activeOffer" v-on:click="onOfferClick(index)" />
+            <Offer v-for="(offer, index) in offers" :data="offer" :key="index" :isActive="index === activeOffer" v-on:click="onOfferClick(index)" :isViewed="isViewed(offer.id)"/>
         </div>
     </section>
 </template>
@@ -38,7 +38,17 @@ export default {
         onOfferClick(index) {
             this.activeOffer = index;
             this.$emit("setActiveOffer", this.activeOffer)
+
+            if(!this.isViewed(this.offers[index].id)){
+                this.$store.commit('addViewedOffer', this.offers[index].id);
+                console.log(this.$store.getters.getViewedOffers);
+            }
         },
+
+        isViewed(id) {
+            if(this.$store.getters.getViewedOffers.length <= 0) return false;
+            return this.$store.getters.getViewedOffers.includes(id);
+        }
     },
 
     watch: {

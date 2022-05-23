@@ -1,5 +1,5 @@
 <template lang="">
-    <div v-bind:class="{'offer active': isActive, 'offer': !isActive }">
+    <div v-bind:class="{'offer active': isActive, 'offer': !isActive }" v-bind:style="{backgroundColor: isViewed ? '#e4e4e8' : ''}">
         <div class="wrapper">
             <div class="company-infos">
                 <div class="company-picture"></div>
@@ -47,7 +47,8 @@ export default {
     name: "Offer",
     props: [
         "data",
-        "isActive"
+        "isActive",
+        "isViewed"
     ],
 };
 
