@@ -1,5 +1,10 @@
 <template lang="">
-    <div v-bind:class="{'navbar-container': showMenu == false, 'navbar-container show': showMenu == true}">
+    <div
+        v-bind:class="{
+            'navbar-container': showMenu == false,
+            'navbar-container show': showMenu == true,
+        }"
+    >
         <div class="navbar-wrapper">
             <div class="logo">
                 <h2>Logo</h2>
@@ -7,71 +12,89 @@
             <div class="menu">
                 <div class="top">
                     <ul>
-                        <li class="active">
-                            <font-awesome-icon
-                                class="icon"
-                                :icon="['fas', 'home']"
-                            />Accueil
-                        </li>
-                        <li>
-                            <font-awesome-icon
-                                class="icon"
-                                :icon="['fas', 'search']"
-                            />Recherche d'emplois
-                        </li>
-                        <li>
-                            <font-awesome-icon
-                                class="icon"
-                                :icon="['fas', 'building']"
-                            />Avis sur les entreprises
-                        </li>
-                        <li>
-                            <font-awesome-icon
-                                class="icon"
-                                :icon="['fas', 'calculator']"
-                            />Estimation de salaire
-                        </li>
+                        <router-link to="/" active-link="active">
+                            <li>
+                                <font-awesome-icon
+                                    class="icon"
+                                    :icon="['fas', 'home']"
+                                />Accueil
+                            </li>
+                        </router-link>
+                        <router-link to="/">
+                            <li>
+                                <font-awesome-icon
+                                    class="icon"
+                                    :icon="['fas', 'search']"
+                                />Recherche d'emplois
+                            </li>
+                        </router-link>
+                        <router-link to="/">
+                            <li>
+                                <font-awesome-icon
+                                    class="icon"
+                                    :icon="['fas', 'building']"
+                                />Avis sur les entreprises
+                            </li>
+                        </router-link>
+                        <router-link to="/">
+                            <li>
+                                <font-awesome-icon
+                                    class="icon"
+                                    :icon="['fas', 'calculator']"
+                                />Estimation de salaire
+                            </li>
+                        </router-link>
                     </ul>
                 </div>
                 <div class="bottom">
                     <!-- If user not logged in -->
-                    <!-- <ul>
-                        <li>
-                            <font-awesome-icon
-                                class="icon"
-                                :icon="['fas', 'user-plus']"
-                            />Inscription
-                        </li>
-                        <li>
-                            <font-awesome-icon
-                                class="icon"
-                                :icon="['fas', 'arrow-right-to-bracket']"
-                            />Connexion
-                        </li>
-                    </ul> -->
+                    <ul v-if="!user">
+                        <router-link to="/">
+                            <li>
+                                <font-awesome-icon
+                                    class="icon"
+                                    :icon="['fas', 'user-plus']"
+                                />Inscription
+                            </li>
+                        </router-link>
+                        <router-link to="/login">
+                            <li>
+                                <font-awesome-icon
+                                    class="icon"
+                                    :icon="['fas', 'arrow-right-to-bracket']"
+                                />Connexion
+                            </li>
+                        </router-link>
+                    </ul>
                     <!-- If user logged in -->
-                    <div class="user-box">
-                        <div class="user-picture">
-
-                        </div>
+                    <div class="user-box" v-if="user">
+                        <div class="user-picture"></div>
 
                         <div class="user-infos">
-                            <span class="display-name">Nom Prénom</span>
+                            <span class="display-name">{{ user.name }}</span>
                             <span>Poste</span>
                         </div>
 
-                        <div class="user-more" v-on:click="showMoreMenu = !showMoreMenu">
-                             <font-awesome-icon
+                        <div
+                            class="user-more"
+                            v-on:click="showMoreMenu = !showMoreMenu"
+                        >
+                            <font-awesome-icon
                                 class="icon"
                                 :icon="['fas', 'ellipsis-v']"
                             />
                         </div>
 
-                        <div class="more-menu" v-bind:style="{transform: showMoreMenu ? 'scaleY(1)' : 'scaleY(0)'}">
+                        <div
+                            class="more-menu"
+                            v-bind:style="{
+                                transform: showMoreMenu
+                                    ? 'scaleY(1)'
+                                    : 'scaleY(0)',
+                            }"
+                        >
                             <ul>
-                                <li>Hey</li>
-                                <li>Hey 2</li>
-                                <li>Hey 3</li>
+                                <li v-on:click="logout()">Se déconnecter</li>
                             </ul>
                         </div>
                     </div>
@@ -80,17 +103,11 @@
         </div>
 
         <div class="mobile-menu-button" v-on:click="showMenu = !showMenu">
-            <div class="open" v-bind:style="{opacity: showMenu ? 0 : 1}">
-                <font-awesome-icon
-                    class="icon"
-                    :icon="['fas', 'bars']"
-                />
+            <div class="open" v-bind:style="{ opacity: showMenu ? 0 : 1 }">
+                <font-awesome-icon class="icon" :icon="['fas', 'bars']" />
             </div>
-            <div class="close" v-bind:style="{opacity: showMenu ? 1 : 0}">
-                <font-awesome-icon
-                    class="icon"
-                    :icon="['fas', 'xmark']"
-                />
+            <div class="close" v-bind:style="{ opacity: showMenu ? 1 : 0 }">
+                <font-awesome-icon class="icon" :icon="['fas', 'xmark']" />
             </div>
         </div>
     </div>
@@ -99,16 +116,43 @@
 <script>
 export default {
     name: "Navbar",
+
     data() {
         return {
             showMenu: false,
-            showMoreMenu: false
-        }
+            showMoreMenu: false,
+        };
+    },
+
+    computed: {
+        user() {
+            return this.$store.getters.getUser;
+        },
+    },
+
+    methods: {
+        logout() {
+            axios
+                .post("/logout")
+                .then(() => {
+                    this.$store.commit("setUser", null);
+                    this.$router.go();
+                })
+                .catch((error) => console.log(error));
+        },
     },
 };
 </script>
 
 <style lang="scss">
+a,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+    text-decoration: none !important;
+    outline: none !important;
+}
 
 .navbar-container {
     background-color: #f8f8fc;
@@ -127,9 +171,10 @@ export default {
         justify-content: center;
         align-items: center;
         z-index: 11;
-        color: #505DF1;
+        color: #505df1;
 
-        .open, .close {
+        .open,
+        .close {
             position: absolute;
             transition: 0.25s all;
         }
@@ -165,7 +210,8 @@ export default {
             flex-direction: column;
             align-items: flex-start;
 
-            .top, .bottom {
+            .top,
+            .bottom {
                 width: 100%;
             }
 
@@ -177,8 +223,16 @@ export default {
                 font-size: 1rem;
             }
 
-            li {
+            a {
                 color: #4d484e;
+
+                &.router-link-active {
+                    color: #505df1;
+                    font-weight: 700;
+                }
+            }
+
+            li {
                 margin: 3vh 0;
                 display: flex;
                 align-items: center;
@@ -187,11 +241,6 @@ export default {
                 .icon {
                     margin: 0 1rem;
                     font-size: 1.25rem;
-                }
-
-                &.active {
-                    color: #505DF1;
-                    font-weight: 700;
                 }
             }
 
@@ -228,7 +277,7 @@ export default {
                     margin: 0 1rem;
 
                     span {
-                        color: #5D618A;
+                        color: #5d618a;
                     }
 
                     .display-name {
@@ -244,7 +293,7 @@ export default {
                 border-radius: 50%;
                 top: 0.5rem;
                 right: 0.5rem;
-                background-color: #A4A4AB;
+                background-color: #a4a4ab;
                 width: 20px;
                 height: 20px;
                 color: white;
@@ -254,7 +303,6 @@ export default {
                 font-size: 0.8rem;
             }
 
-            
             .more-menu {
                 position: absolute;
                 display: flex;
@@ -262,8 +310,8 @@ export default {
                 justify-content: center;
                 background-color: #f8f8fc;
                 bottom: 100%;
-                left: 5%;
-                right: 5%;
+                left: 10%;
+                right: 10%;
                 overflow: hidden;
                 text-align: center;
                 border: 2px solid #dbdbdb;
@@ -272,11 +320,15 @@ export default {
                 transform-origin: bottom;
                 transition: all 0.5s ease-in-out;
                 z-index: 20;
+
+                li {
+                    margin: 1rem 0;
+                    cursor: pointer;
+                }
             }
         }
     }
 }
-
 
 @media screen and (max-width: 1024px) {
     .navbar-container {

@@ -23,20 +23,13 @@
             @setSidebarShow="setSidebarShow($event)"
         />
     </main>
-    <!-- <main>
-        <Searchbar @changename="myName = $event"></Searchbar>
-        <div class="test" :style="{height: myName == 'John' ? '80%' : '0px'}">
-            My Name is {{ myName }}
-        </div>
-        <OffersContainer />
-    </main> -->
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
-import Searchbar from "./components/Searchbar.vue";
-import OffersContainer from "./components/OffersContainer.vue";
-import Sidebar from "./components/Sidebar.vue";
+import Navbar from "../components/Navbar.vue";
+import Searchbar from "../components/Searchbar.vue";
+import OffersContainer from "../components/OffersContainer.vue";
+import Sidebar from "../components/Sidebar.vue";
 import axios from "axios";
 import moment from "moment";
 export default {
@@ -46,6 +39,8 @@ export default {
         OffersContainer,
         Sidebar,
     },
+
+    props: ["user"],
 
     data() {
         return {
@@ -71,7 +66,8 @@ export default {
         async getLastOffers() {
             // Get offers based on user last search keywords if there are any, else get last offers. (USING VUEX PERSISTANT STORE)
             if (this.$store.getters.getCurrentSearchInput) {
-                const keywordsArray = this.$store.getters.getCurrentSearchInput.split(" ");
+                const keywordsArray =
+                    this.$store.getters.getCurrentSearchInput.split(" ");
 
                 const data = await axios
                     .request({
@@ -144,7 +140,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/app.css";
+@import "../../styles/app.css";
 
 main {
     display: flex;
