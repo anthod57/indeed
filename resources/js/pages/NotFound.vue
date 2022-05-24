@@ -8,7 +8,7 @@
 export default {};
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 *,
 :after,
 :before {
@@ -24,12 +24,12 @@ html {
 }
 
 body {
-    background-color: #1a202c;
     font-family: "Nunito", sans-serif;
     margin: 0;
 }
 
 .not-found {
+    background-color: #1a202c;
     display: flex;
     justify-content: center;
     min-height: 100vh;
