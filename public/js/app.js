@@ -35428,7 +35428,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" If user logged in "), $options.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: "/storage/images/profiles/".concat($options.user.id, ".png"),
     onError: _cache[0] || (_cache[0] = function ($event) {
-      return $event.target.src = '/storage/images/profiles/default.png';
+      return $event.target.src = '/images/default.png';
     })
   }, null, 40
   /* PROPS, HYDRATE_EVENTS */

@@ -39,7 +39,7 @@
                     <!-- If user logged in -->
                     <div class="user-box" v-if="user">
                         <div class="user-picture">
-                            <img :src="`/storage/images/profiles/${user.id}.png`" @error="$event.target.src = '/storage/images/profiles/default.png'" />
+                            <img :src="`/storage/images/profiles/${user.id}.png`" @error="$event.target.src = '/images/default.png'" />
                             <input type="file" ref="profilePicture" accept="image/*" @change="updateProfilePicture()" />
                         </div>
 
