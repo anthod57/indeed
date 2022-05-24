@@ -1,17 +1,26 @@
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import NotFound from './pages/NotFound';
 
 export const routes = [
-    // {
-    //     path: '*',
-    //     component: NotFound
-    // },
+    {
+        path: '/:catchAll(.*)',
+        redirect: '/404'
+    },
+
+    {
+        path: '/404',
+        component: NotFound,
+        name: "404"
+    },
+
     {
         path: '/',
         component: Home,
         name: "Home"
     },
+
     {
         path: '/login',
         component: Login,

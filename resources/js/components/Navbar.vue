@@ -15,13 +15,10 @@
                         <router-link to="/" active-link="active">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'home']" />Accueil</li>
                         </router-link>
-                        <router-link to="/">
-                            <li><font-awesome-icon class="icon" :icon="['fas', 'search']" />Recherche d'emplois</li>
-                        </router-link>
-                        <router-link to="/">
+                        <router-link to="/avis-sur-les-entreprises">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'building']" />Avis sur les entreprises</li>
                         </router-link>
-                        <router-link to="/">
+                        <router-link to="/estimation-de-salaire">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'calculator']" />Estimation de salaire</li>
                         </router-link>
                     </ul>
