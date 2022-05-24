@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Offers;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -15,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Offers::factory(10)->create();
+        User::factory(5)->create();
+        Offers::factory(5)->create();
     }
 }

@@ -15,6 +15,7 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
+            $table->integer('postedBy');
             $table->string('title');
             $table->string('company');
             $table->integer('type');
@@ -22,6 +23,7 @@ class CreateOffersTable extends Migration
             $table->string('location');
             $table->integer('views')->default(0);
             $table->integer('salary')->default(0);
+            $table->json('applied');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OffersFactory extends Factory
@@ -17,6 +18,7 @@ class OffersFactory extends Factory
 
         return [
             'title' => $this->faker->jobTitle(),
+            'postedBy' => User::all()->random()->id,
             'company' => $this->faker->company(),
             'location' => $this->faker->city(),
             'description' => $this->faker->realTextBetween(50,300, 2),

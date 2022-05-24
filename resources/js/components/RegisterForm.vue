@@ -1,26 +1,46 @@
 <template lang="">
-    <section class="login-form">
-        <h2>Connexion</h2>
+    <section class="register-form">
+        <h2>Inscription</h2>
         <div class="wrapper">
             <div class="row">
                 <div class="input">
-                    <label for="email">Adresse email:</label
-                    ><input type="email" id="email" name="email" placeholder="Adresse email" required v-model="form.email" v-on:keyup.enter="handleLogin()" />
+                    <label for="email">Nom:</label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Nom" required v-model="form.lastname" v-on:keyup.enter="handleRegister()" />
                 </div>
+
                 <div class="input">
-                    <label for="password">Mot de passe:</label
-                    ><input
+                    <label for="email">Prénom:</label>
+                    <input
+                        type="text"
+                        id="firstname"
+                        name="firstname"
+                        placeholder="Prénom"
+                        required
+                        v-model="form.firstname"
+                        v-on:keyup.enter="handleRegister()"
+                    />
+                </div>
+
+                <div class="input">
+                    <label for="email">Adresse email:</label>
+                    <input type="email" id="email" name="email" placeholder="Adresse email" required v-model="form.email" v-on:keyup.enter="handleRegister()" />
+                </div>
+
+                <div class="input">
+                    <label for="password">Mot de passe:</label>
+                    <input
                         type="password"
                         id="password"
                         name="password"
                         placeholder="Mot de passe"
                         required
                         v-model="form.password"
-                        v-on:keyup.enter="handleLogin()"
+                        v-on:keyup.enter="handleRegister()"
                     />
                 </div>
+
                 <span class="error" v-if="error">{{ error }}</span>
-                <button v-on:click="handleLogin()">Se connecter</button>
+                <button v-on:click="handleRegister()">S'inscrire</button>
             </div>
         </div>
     </section>
@@ -28,11 +48,16 @@
 
 <script>
 export default {
-    name: "LoginForm",
+    name: "RegisterForm",
 
     data() {
         return {
-            form: { email: null, password: null },
+            form: {
+                lastname: null,
+                firstname: null,
+                email: null,
+                password: null,
+            },
             error: "",
         };
     },
@@ -40,7 +65,7 @@ export default {
     mounted() {},
 
     methods: {
-        handleLogin() {
+        handleRegister() {
             this.error = null;
 
             // Check if user credentials are correctly provided.
@@ -53,22 +78,14 @@ export default {
                     // GET request done, we now have the required xsrf-token.
                     // Axios automatically manages the headers data for us, nothing more to do.
 
-                    // Send login request.
-                    return axios.post("/login", this.form);
+                    // Send register request.
+                    return axios.post("/register", this.form);
                 })
                 .then((response) => {
-                    // If no errors, we put the user object which contains public data in a Vuex state.
-                    // Then redirect to the hompage.
-                    window.auth_user = response.data;
-                    this.$store.commit("setUser", response.data);
-                    this.$router.push({ name: "Home" });
+                    // Redirect to login page.
+                    this.$router.push({ name: "Login" });
                 })
                 .catch((error) => {
-                    if (error.response.status === 401) {
-                        this.error = "Email ou mot de passe incorrect.";
-                        return;
-                    }
-
                     this.error = "Une erreur inconnue est survenue.";
                     console.log(error.response);
                 });
@@ -81,9 +98,19 @@ export default {
                 return false;
             }
 
-            // Check if the password provided by the user is empty.
+            // Check if the password, firstname and lastname provided by the user are empty.
             if (!this.form.password) {
                 this.error = "Veuillez entrer un mot de passe.";
+                return false;
+            }
+
+            if (!this.form.firstname) {
+                this.error = "Veuillez entrer un prénom.";
+                return false;
+            }
+
+            if (!this.form.lastname) {
+                this.error = "Veuillez entrer un nom.";
                 return false;
             }
 
@@ -94,7 +121,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login-form {
+.register-form {
     width: 100%;
     max-width: 800px;
 

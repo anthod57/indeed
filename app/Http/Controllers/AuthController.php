@@ -33,13 +33,15 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $credentials = $request->validate([
-            'name' => ['required', 'string'],
+            'lastname' => ['required', 'string'],
+            'firstname' => ['required', 'string'],
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
         $user = User::create([
-            'name' => $credentials['name'],
+            'lastname' => $credentials['lastname'],
+            'firstname' => $credentials['firstname'],
             'email' => $credentials['email'], 
             'password' => bcrypt($credentials['password'])
         ]);

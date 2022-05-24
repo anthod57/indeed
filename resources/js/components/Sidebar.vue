@@ -5,7 +5,7 @@
             'sidebar-container': !show,
         }"
     >
-        <div class="close-button" v-on:click="test()">
+        <div class="close-button" v-on:click="handleSidebar()">
             <font-awesome-icon class="icon" :icon="['fas', 'xmark']" />
         </div>
         <div class="sidebar-wrapper" v-if="offer">
@@ -48,10 +48,10 @@ export default {
 
     methods: {
         getRelativeTime(time) {
-            return moment(time).locale("fr").fromNow();
+            return moment(time).locale("fr").fromNow(); // Ex: Il y a 6 heures | Il y a 2 jours.
         },
 
-        test() {
+        handleSidebar() {
             this.$emit("setSidebarShow", !this.show);
         },
     },
@@ -170,11 +170,7 @@ button {
     padding: 1rem 2rem;
     border-radius: 20px;
     background-color: rgba(153, 167, 237, 1);
-    background-image: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(80, 93, 241, 1) 80%
-    );
+    background-image: linear-gradient(90deg, transparent 0%, rgba(80, 93, 241, 1) 80%);
     color: white;
     font-weight: 600;
     font-size: 1rem;

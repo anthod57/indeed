@@ -1,35 +1,37 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0; 
-  padding: 0; 
-  border: 0; 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
-html, body {
-  height: 100%;
-  width: 100%;
+html,
+body {
+    height: 100%;
+    width: 100%;
 }
 
 body {
-  color: black;
-  background: #F1F1FC;
-  transition: color 0.5s, background-color 0.5s;
-  font-family: 'Nunito';
-  font-size: 16px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
-  display: flex;
+    color: black;
+    background: #f1f1fc;
+    transition: color 0.5s, background-color 0.5s;
+    font-family: "Nunito";
+    font-size: 16px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    display: flex;
 }
 
 main {
-
 }
 
-input:focus, textarea:focus, select:focus{
+input:focus,
+textarea:focus,
+select:focus {
     outline: none;
 }
 
@@ -39,55 +41,78 @@ input:focus, textarea:focus, select:focus{
 
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #505DF1;
-  border-radius: 20px;
+    background: #505df1;
+    border-radius: 20px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #6471ff;
+    background: #6471ff;
 }
 
 .v-select {
-
 }
 
 .vs__dropdown-toggle {
-  background-color: #f8f8fc !important;
-  border-color: #3b3b3b !important;
-  border-radius: 20px !important;
-  padding: 0.25rem 0.5rem !important;
-  padding-bottom: calc(0.25rem + 4px) !important;
+    background-color: #f8f8fc !important;
+    border-color: #3b3b3b !important;
+    border-radius: 20px !important;
+    padding: 0.25rem 0.5rem !important;
+    padding-bottom: calc(0.25rem + 4px) !important;
 }
 
 .v-select input {
-  width: 140px !important; 
-  cursor: pointer !important;
+    width: 140px !important;
+    cursor: pointer !important;
 }
 
 .vs__selected {
-  position: absolute;
+    position: absolute;
 }
 
 .vs__actions {
-  margin-right: 2px;
+    margin-right: 2px;
 }
 
 .vs__clear {
-  display: none;
+    display: none;
 }
+
+button {
+    cursor: pointer;
+    width: 100%;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    background-color: rgba(153, 167, 237, 1);
+    background-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(80, 93, 241, 1) 80%
+    );
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    max-width: 300px;
+    transition: 0.25s all;
+    margin: 0.5rem;
+}
+
+button:active {
+    background-color: rgba(80, 93, 241, 1);
+}
+
 @media screen and (min-width: 1024px) {
     body {
-      display: flex;
+        display: flex;
     }
 }

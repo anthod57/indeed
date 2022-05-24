@@ -34,12 +34,12 @@ const icons = [
 library.add(icons);
 
 const router = createRouter({
-    // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
     history: createWebHistory(),
-    routes, // short for `routes: routes`
+    routes,
 })
 
 router.beforeEach(async (to, from) => {
+    // Update the user state. Allows to directly spot if the user got logged out.
     store.commit("setUser", window.auth_user);
 })
 

@@ -9,5 +9,15 @@ class Offers extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'company', 'description', 'type', 'location', 'views', 'salary'];
+    protected $fillable = ['title', 'company', 'description', 'type', 'location', 'views', 'salary', 'postedBy'];
+
+    protected $casts = [
+        'applied' => 'array'
+    ];
+
+    protected $attributes = [
+        'applied' => '{
+            "users": []
+        }'
+    ];
 }

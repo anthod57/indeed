@@ -1,5 +1,5 @@
 <template lang="">
-    <div v-bind:class="{'offer active': isActive, 'offer': !isActive }" v-bind:style="{backgroundColor: isViewed ? '#e4e4e8' : ''}">
+    <div v-bind:class="{ 'offer active': isActive, offer: !isActive }" v-bind:style="{ backgroundColor: isViewed ? '#e4e4e8' : '' }">
         <div class="wrapper">
             <div class="company-infos">
                 <div class="company-picture"></div>
@@ -8,17 +8,11 @@
                     <h3>{{ data.title }}</h3>
                     <div class="row">
                         <span>
-                            <font-awesome-icon
-                                class="icon"
-                                :icon="['fas', 'location-dot']"
-                            />
+                            <font-awesome-icon class="icon" :icon="['fas', 'location-dot']" />
                             {{ data.location }}
                         </span>
                         <span>
-                            <font-awesome-icon
-                                class="icon"
-                                :icon="['fas', 'eye']"
-                            />
+                            <font-awesome-icon class="icon" :icon="['fas', 'eye']" />
                             {{ data.views }}
                         </span>
                     </div>
@@ -45,13 +39,9 @@
 <script>
 export default {
     name: "Offer",
-    props: [
-        "data",
-        "isActive",
-        "isViewed"
-    ],
-};
 
+    props: ["data", "isActive", "isViewed"],
+};
 </script>
 
 <style lang="scss" scoped>
@@ -97,7 +87,7 @@ export default {
             gap: 1rem;
 
             .infos {
-                color: #5D618A;
+                color: #5d618a;
 
                 h2 {
                     color: #3b3b3b;

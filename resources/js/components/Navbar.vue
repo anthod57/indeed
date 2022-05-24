@@ -13,84 +13,49 @@
                 <div class="top">
                     <ul>
                         <router-link to="/" active-link="active">
-                            <li>
-                                <font-awesome-icon
-                                    class="icon"
-                                    :icon="['fas', 'home']"
-                                />Accueil
-                            </li>
+                            <li><font-awesome-icon class="icon" :icon="['fas', 'home']" />Accueil</li>
                         </router-link>
                         <router-link to="/">
-                            <li>
-                                <font-awesome-icon
-                                    class="icon"
-                                    :icon="['fas', 'search']"
-                                />Recherche d'emplois
-                            </li>
+                            <li><font-awesome-icon class="icon" :icon="['fas', 'search']" />Recherche d'emplois</li>
                         </router-link>
                         <router-link to="/">
-                            <li>
-                                <font-awesome-icon
-                                    class="icon"
-                                    :icon="['fas', 'building']"
-                                />Avis sur les entreprises
-                            </li>
+                            <li><font-awesome-icon class="icon" :icon="['fas', 'building']" />Avis sur les entreprises</li>
                         </router-link>
                         <router-link to="/">
-                            <li>
-                                <font-awesome-icon
-                                    class="icon"
-                                    :icon="['fas', 'calculator']"
-                                />Estimation de salaire
-                            </li>
+                            <li><font-awesome-icon class="icon" :icon="['fas', 'calculator']" />Estimation de salaire</li>
                         </router-link>
                     </ul>
                 </div>
                 <div class="bottom">
                     <!-- If user not logged in -->
                     <ul v-if="!user">
-                        <router-link to="/">
-                            <li>
-                                <font-awesome-icon
-                                    class="icon"
-                                    :icon="['fas', 'user-plus']"
-                                />Inscription
-                            </li>
+                        <router-link to="/register">
+                            <li><font-awesome-icon class="icon" :icon="['fas', 'user-plus']" />Inscription</li>
                         </router-link>
                         <router-link to="/login">
-                            <li>
-                                <font-awesome-icon
-                                    class="icon"
-                                    :icon="['fas', 'arrow-right-to-bracket']"
-                                />Connexion
-                            </li>
+                            <li><font-awesome-icon class="icon" :icon="['fas', 'arrow-right-to-bracket']" />Connexion</li>
                         </router-link>
                     </ul>
                     <!-- If user logged in -->
                     <div class="user-box" v-if="user">
-                        <div class="user-picture"></div>
-
-                        <div class="user-infos">
-                            <span class="display-name">{{ user.name }}</span>
-                            <span>Poste</span>
+                        <div class="user-picture">
+                            <img :src="`/storage/images/profiles/${user.id}.png`" @error="$event.target.src = '/storage/images/profiles/default.png'" />
+                            <input type="file" ref="profilePicture" accept="image/*" @change="updateProfilePicture()" />
                         </div>
 
-                        <div
-                            class="user-more"
-                            v-on:click="showMoreMenu = !showMoreMenu"
-                        >
-                            <font-awesome-icon
-                                class="icon"
-                                :icon="['fas', 'ellipsis-v']"
-                            />
+                        <div class="user-infos">
+                            <span class="display-name">{{ user.lastname }} {{ user.firstname }}</span>
+                            <span>{{ user.job }}</span>
+                        </div>
+
+                        <div class="user-more" v-on:click="showMoreMenu = !showMoreMenu">
+                            <font-awesome-icon class="icon" :icon="['fas', 'ellipsis-v']" />
                         </div>
 
                         <div
                             class="more-menu"
                             v-bind:style="{
-                                transform: showMoreMenu
-                                    ? 'scaleY(1)'
-                                    : 'scaleY(0)',
+                                transform: showMoreMenu ? 'scaleY(1)' : 'scaleY(0)',
                             }"
                         >
                             <ul>
@@ -135,10 +100,32 @@ export default {
             axios
                 .post("/logout")
                 .then(() => {
+                    // Clear user Vuex state and refresh the page.
                     this.$store.commit("setUser", null);
                     this.$router.go();
                 })
                 .catch((error) => console.log(error));
+        },
+
+        updateProfilePicture() {
+            if (this.$refs.profilePicture) {
+                let formData = new FormData();
+                formData.append("avatar", this.$refs.profilePicture.files[0]);
+
+                // Upload the picture.
+                axios
+                    .post("/upload_profile_picture", formData)
+                    .then(() => {
+                        this.$router.go();
+                    })
+                    .catch((error) => {
+                        if (error.response) {
+                            console.log(error.message);
+                        } else {
+                            console.log(error);
+                        }
+                    });
+            }
         },
     },
 };
@@ -236,11 +223,18 @@ a:focus {
                 margin: 3vh 0;
                 display: flex;
                 align-items: center;
-                transition: 0.5s all;
 
                 .icon {
                     margin: 0 1rem;
                     font-size: 1.25rem;
+                    transition: 0.5s all;
+                }
+
+                &:hover {
+                    .icon {
+                        color: #505df1;
+                        transform: scale(1.1);
+                    }
                 }
             }
 
@@ -263,8 +257,32 @@ a:focus {
                     min-width: 25px;
                     max-width: 60px;
                     aspect-ratio: 1/1;
-                    border: 1px solid black;
                     border-radius: 50%;
+                    position: relative;
+                    overflow: hidden;
+                    cursor: pointer;
+
+                    input {
+                        position: absolute;
+                        height: 100%;
+                        width: 100%;
+                        cursor: pointer !important;
+                        z-index: 5;
+                        font-size: 5rem;
+                        opacity: 0;
+
+                        &::-webkit-file-upload-button {
+                            cursor: pointer;
+                        }
+                    }
+
+                    img {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        cursor: pointer;
+                    }
                 }
 
                 .user-infos {
@@ -315,7 +333,6 @@ a:focus {
                 overflow: hidden;
                 text-align: center;
                 border: 2px solid #dbdbdb;
-                border-bottom: 0px;
                 border-radius: 10px 10px 0 0;
                 transform-origin: bottom;
                 transition: all 0.5s ease-in-out;
