@@ -24,6 +24,10 @@
                         <router-link to="/estimation-de-salaire">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'calculator']" />Estimation de salaire</li>
                         </router-link>
+
+                        <router-link to="/publier-une-annonce">
+                            <li><font-awesome-icon class="icon" :icon="['fas', 'bullhorn']" />Publier une annonce</li>
+                        </router-link>
                     </ul>
                 </div>
 
@@ -63,7 +67,7 @@
                         >
                             <ul>
                                 <router-link to="/mon-profil">
-                                    <li><font-awesome-icon class="icon" :icon="['fas', 'arrow-right-to-bracket']" />Mon profil</li>
+                                    <li>Mon profil</li>
                                 </router-link>
 
                                 <li v-on:click="logout()">Se déconnecter</li>
@@ -236,6 +240,8 @@ a:focus {
                     margin: 0 1rem;
                     font-size: 1.25rem;
                     transition: 0.5s all;
+                    width: 20px;
+                    margin-right: 1rem;
                 }
 
                 &:hover {

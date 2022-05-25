@@ -5,7 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import vSelect from 'vue-select'
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faHome, faBuilding, faCalculator, faUserPlus, faArrowRightToBracket, faEllipsisV, faSliders, faBars, faXmark, faLocationDot, faEye, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faHome, faBuilding, faCalculator, faUserPlus, faArrowRightToBracket, faEllipsisV, faSliders, faBars, faXmark, faLocationDot, faEye, faBookmark, faUser, faDoorOpen, faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import 'vue-select/dist/vue-select.css';
@@ -28,7 +28,10 @@ const icons = [
     faXmark,
     faLocationDot,
     faEye,
-    faBookmark
+    faBookmark,
+    faUser,
+    faDoorOpen,
+    faBullhorn
 ];
 
 library.add(icons);

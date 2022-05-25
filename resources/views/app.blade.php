@@ -10,9 +10,22 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="{{ asset( mix('js/app.js')) }}" type="text/javascript" defer></script>
-    <script>
-        window.auth_user = @json(Auth::user())
-    </script>
+    
+    @if (Auth::check())
+        <script>
+            window.auth_user = @json(Auth::user())
+        </script>
+    @else
+        @if (Auth::guard('company')->check())
+        <script>
+            window.auth_user = @json(Auth::guard('company')->user())
+        </script>
+        @else
+            <script>
+                window.auth_user = null;
+            </script>
+        @endif
+    @endif
 </head>
 
 <!-- DESIGN INSPIRED BY https://dribbble.com/shots/15369006-HuntJobs-Job-Search-Dashboard -->

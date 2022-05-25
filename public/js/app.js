@@ -35330,33 +35330,37 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Estimation de salaire");
 
-var _hoisted_8 = {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Publier une annonce");
+
+var _hoisted_9 = {
   "class": "bottom"
 };
-var _hoisted_9 = {
+var _hoisted_10 = {
   key: 0
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Inscription");
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Inscription");
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Connexion");
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Connexion");
 
-var _hoisted_12 = {
+var _hoisted_13 = {
   key: 1,
   "class": "user-box"
 };
-var _hoisted_13 = {
+var _hoisted_14 = {
   "class": "user-picture"
 };
-var _hoisted_14 = ["src"];
-var _hoisted_15 = {
+var _hoisted_15 = ["src"];
+var _hoisted_16 = {
   "class": "user-infos"
 };
-var _hoisted_16 = {
+var _hoisted_17 = {
   "class": "display-name"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Mon profil");
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, "Mon profil", -1
+/* HOISTED */
+);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_font_awesome_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("font-awesome-icon");
@@ -35405,14 +35409,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" If user not logged in "), !$options.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/publier-une-annonce"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+        "class": "icon",
+        icon: ['fas', 'bullhorn']
+      }), _hoisted_8])];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" If user not logged in "), !$options.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/register"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
         "class": "icon",
         icon: ['fas', 'user-plus']
-      }), _hoisted_10])];
+      }), _hoisted_11])];
     }),
     _: 1
     /* STABLE */
@@ -35424,19 +35440,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
         "class": "icon",
         icon: ['fas', 'arrow-right-to-bracket']
-      }), _hoisted_11])];
+      }), _hoisted_12])];
     }),
     _: 1
     /* STABLE */
 
-  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" If user logged in "), $options.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" If user logged in "), $options.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: "/storage/images/profiles/".concat($options.user.id, ".png"),
     onError: _cache[0] || (_cache[0] = function ($event) {
       return $event.target.src = '/images/default.png';
     })
   }, null, 40
   /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "file",
     ref: "profilePicture",
     accept: "image/*",
@@ -35445,7 +35461,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.lastname) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.firstname), 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.lastname) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.firstname), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.job), 1
   /* TEXT */
@@ -35466,10 +35482,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     to: "/mon-profil"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
-        "class": "icon",
-        icon: ['fas', 'arrow-right-to-bracket']
-      }), _hoisted_17])];
+      return [_hoisted_18];
     }),
     _: 1
     /* STABLE */
@@ -36258,7 +36271,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 axios.defaults.withCredentials = true;
-var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faSearch, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faHome, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faBuilding, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faCalculator, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faUserPlus, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faArrowRightToBracket, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faEllipsisV, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faSliders, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faBars, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faXmark, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faLocationDot, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faEye, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faBookmark];
+var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faSearch, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faHome, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faBuilding, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faCalculator, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faUserPlus, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faArrowRightToBracket, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faEllipsisV, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faSliders, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faBars, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faXmark, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faLocationDot, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faEye, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faBookmark, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faUser, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faDoorOpen, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faBullhorn];
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(icons);
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_8__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_8__.createWebHistory)(),
@@ -36473,7 +36486,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "a,\na:visited,\na:hover,\na:active,\na:focus {\n  text-decoration: none !important;\n  outline: none !important;\n}\n.navbar-container {\n  background-color: #f8f8fc;\n  height: 100%;\n  width: 25vw;\n  color: black;\n}\n.navbar-container .mobile-menu-button {\n  position: fixed;\n  width: 50px;\n  height: 50px;\n  top: 1rem;\n  left: 1rem;\n  font-size: 2.5rem;\n  display: none;\n  justify-content: center;\n  align-items: center;\n  z-index: 11;\n  color: #505df1;\n}\n.navbar-container .mobile-menu-button .open,\n.navbar-container .mobile-menu-button .close {\n  position: absolute;\n  transition: 0.25s all;\n}\n.navbar-container .navbar-wrapper {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  height: 100%;\n  padding: 1rem 2vw;\n}\n.navbar-container .navbar-wrapper .logo {\n  width: 100%;\n  height: 200px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.navbar-container .navbar-wrapper .logo h2 {\n  text-align: center;\n  font-size: 2.5rem;\n}\n.navbar-container .navbar-wrapper .menu {\n  width: 100%;\n  height: 100%;\n  padding: 1rem;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  align-items: flex-start;\n}\n.navbar-container .navbar-wrapper .menu .top,\n.navbar-container .navbar-wrapper .menu .bottom {\n  width: 100%;\n}\n.navbar-container .navbar-wrapper .menu ul {\n  list-style: none;\n  -webkit-margin-before: 0;\n          margin-block-start: 0;\n  -webkit-margin-after: 0;\n          margin-block-end: 0;\n  -webkit-padding-start: 0;\n          padding-inline-start: 0;\n  font-size: 1rem;\n}\n.navbar-container .navbar-wrapper .menu a {\n  color: #4d484e;\n}\n.navbar-container .navbar-wrapper .menu a.router-link-active {\n  color: #505df1;\n  font-weight: 700;\n}\n.navbar-container .navbar-wrapper .menu li {\n  margin: 3vh 0;\n  display: flex;\n  align-items: center;\n}\n.navbar-container .navbar-wrapper .menu li .icon {\n  margin: 0 1rem;\n  font-size: 1.25rem;\n  transition: 0.5s all;\n}\n.navbar-container .navbar-wrapper .menu li:hover .icon {\n  color: #505df1;\n  transform: scale(1.1);\n}\n.navbar-container .navbar-wrapper .menu .user-box {\n  width: 100%;\n  height: 100px;\n  max-width: 400px;\n  margin: auto;\n  border: 2px solid #dbdbdb;\n  border-radius: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 1rem;\n  position: relative;\n  transition: all 0.5s ease-in-out;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture {\n  width: 33%;\n  min-width: 25px;\n  max-width: 60px;\n  aspect-ratio: 1/1;\n  border-radius: 50%;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture input {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  cursor: pointer !important;\n  z-index: 5;\n  font-size: 5rem;\n  opacity: 0;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture input::-webkit-file-upload-button {\n  cursor: pointer;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture img {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  cursor: pointer;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-content: center;\n  width: 100%;\n  height: 100%;\n  margin: 0 1rem;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos span {\n  color: #5d618a;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos .display-name {\n  font-weight: 700;\n  color: #1421b5;\n}\n.navbar-container .navbar-wrapper .menu .user-more {\n  cursor: pointer;\n  position: absolute;\n  border-radius: 50%;\n  top: 0.5rem;\n  right: 0.5rem;\n  background-color: #a4a4ab;\n  width: 20px;\n  height: 20px;\n  color: white;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 0.8rem;\n}\n.navbar-container .navbar-wrapper .menu .more-menu {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #f8f8fc;\n  bottom: 100%;\n  left: 10%;\n  right: 10%;\n  overflow: hidden;\n  text-align: center;\n  border: 2px solid #dbdbdb;\n  border-radius: 10px 10px 0 0;\n  transform-origin: bottom;\n  transition: all 0.5s ease-in-out;\n  z-index: 20;\n}\n.navbar-container .navbar-wrapper .menu .more-menu li {\n  margin: 1rem 0;\n  cursor: pointer;\n}\n@media screen and (max-width: 1024px) {\n.navbar-container {\n    position: fixed;\n    z-index: 10;\n    left: -180%;\n    width: auto;\n    overflow: hidden;\n    transition: 0.5s all;\n}\n.navbar-container .mobile-menu-button {\n    display: flex;\n    opacity: 1;\n}\n.navbar-container .navbar-wrapper {\n    opacity: 0;\n}\n.navbar-container.show {\n    left: 0;\n}\n.navbar-container.show .navbar-wrapper {\n    opacity: 1;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "a,\na:visited,\na:hover,\na:active,\na:focus {\n  text-decoration: none !important;\n  outline: none !important;\n}\n.navbar-container {\n  background-color: #f8f8fc;\n  height: 100%;\n  width: 25vw;\n  color: black;\n}\n.navbar-container .mobile-menu-button {\n  position: fixed;\n  width: 50px;\n  height: 50px;\n  top: 1rem;\n  left: 1rem;\n  font-size: 2.5rem;\n  display: none;\n  justify-content: center;\n  align-items: center;\n  z-index: 11;\n  color: #505df1;\n}\n.navbar-container .mobile-menu-button .open,\n.navbar-container .mobile-menu-button .close {\n  position: absolute;\n  transition: 0.25s all;\n}\n.navbar-container .navbar-wrapper {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  height: 100%;\n  padding: 1rem 2vw;\n}\n.navbar-container .navbar-wrapper .logo {\n  width: 100%;\n  height: 200px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.navbar-container .navbar-wrapper .logo h2 {\n  text-align: center;\n  font-size: 2.5rem;\n}\n.navbar-container .navbar-wrapper .menu {\n  width: 100%;\n  height: 100%;\n  padding: 1rem;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  align-items: flex-start;\n}\n.navbar-container .navbar-wrapper .menu .top,\n.navbar-container .navbar-wrapper .menu .bottom {\n  width: 100%;\n}\n.navbar-container .navbar-wrapper .menu ul {\n  list-style: none;\n  -webkit-margin-before: 0;\n          margin-block-start: 0;\n  -webkit-margin-after: 0;\n          margin-block-end: 0;\n  -webkit-padding-start: 0;\n          padding-inline-start: 0;\n  font-size: 1rem;\n}\n.navbar-container .navbar-wrapper .menu a {\n  color: #4d484e;\n}\n.navbar-container .navbar-wrapper .menu a.router-link-active {\n  color: #505df1;\n  font-weight: 700;\n}\n.navbar-container .navbar-wrapper .menu li {\n  margin: 3vh 0;\n  display: flex;\n  align-items: center;\n}\n.navbar-container .navbar-wrapper .menu li .icon {\n  margin: 0 1rem;\n  font-size: 1.25rem;\n  transition: 0.5s all;\n  width: 20px;\n  margin-right: 1rem;\n}\n.navbar-container .navbar-wrapper .menu li:hover .icon {\n  color: #505df1;\n  transform: scale(1.1);\n}\n.navbar-container .navbar-wrapper .menu .user-box {\n  width: 100%;\n  height: 100px;\n  max-width: 400px;\n  margin: auto;\n  border: 2px solid #dbdbdb;\n  border-radius: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 1rem;\n  position: relative;\n  transition: all 0.5s ease-in-out;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture {\n  width: 33%;\n  min-width: 25px;\n  max-width: 60px;\n  aspect-ratio: 1/1;\n  border-radius: 50%;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture input {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  cursor: pointer !important;\n  z-index: 5;\n  font-size: 5rem;\n  opacity: 0;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture input::-webkit-file-upload-button {\n  cursor: pointer;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-picture img {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  cursor: pointer;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-content: center;\n  width: 100%;\n  height: 100%;\n  margin: 0 1rem;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos span {\n  color: #5d618a;\n}\n.navbar-container .navbar-wrapper .menu .user-box .user-infos .display-name {\n  font-weight: 700;\n  color: #1421b5;\n}\n.navbar-container .navbar-wrapper .menu .user-more {\n  cursor: pointer;\n  position: absolute;\n  border-radius: 50%;\n  top: 0.5rem;\n  right: 0.5rem;\n  background-color: #a4a4ab;\n  width: 20px;\n  height: 20px;\n  color: white;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 0.8rem;\n}\n.navbar-container .navbar-wrapper .menu .more-menu {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #f8f8fc;\n  bottom: 100%;\n  left: 10%;\n  right: 10%;\n  overflow: hidden;\n  text-align: center;\n  border: 2px solid #dbdbdb;\n  border-radius: 10px 10px 0 0;\n  transform-origin: bottom;\n  transition: all 0.5s ease-in-out;\n  z-index: 20;\n}\n.navbar-container .navbar-wrapper .menu .more-menu li {\n  margin: 1rem 0;\n  cursor: pointer;\n}\n@media screen and (max-width: 1024px) {\n.navbar-container {\n    position: fixed;\n    z-index: 10;\n    left: -180%;\n    width: auto;\n    overflow: hidden;\n    transition: 0.5s all;\n}\n.navbar-container .mobile-menu-button {\n    display: flex;\n    opacity: 1;\n}\n.navbar-container .navbar-wrapper {\n    opacity: 0;\n}\n.navbar-container.show {\n    left: 0;\n}\n.navbar-container.show .navbar-wrapper {\n    opacity: 1;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
