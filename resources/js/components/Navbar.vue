@@ -9,30 +9,36 @@
             <div class="logo">
                 <h2>Logo</h2>
             </div>
+
             <div class="menu">
                 <div class="top">
                     <ul>
                         <router-link to="/" active-link="active">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'home']" />Accueil</li>
                         </router-link>
+
                         <router-link to="/avis-sur-les-entreprises">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'building']" />Avis sur les entreprises</li>
                         </router-link>
+
                         <router-link to="/estimation-de-salaire">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'calculator']" />Estimation de salaire</li>
                         </router-link>
                     </ul>
                 </div>
+
                 <div class="bottom">
                     <!-- If user not logged in -->
                     <ul v-if="!user">
                         <router-link to="/register">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'user-plus']" />Inscription</li>
                         </router-link>
+
                         <router-link to="/login">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'arrow-right-to-bracket']" />Connexion</li>
                         </router-link>
                     </ul>
+
                     <!-- If user logged in -->
                     <div class="user-box" v-if="user">
                         <div class="user-picture">
@@ -56,6 +62,10 @@
                             }"
                         >
                             <ul>
+                                <router-link to="/mon-profil">
+                                    <li><font-awesome-icon class="icon" :icon="['fas', 'arrow-right-to-bracket']" />Mon profil</li>
+                                </router-link>
+
                                 <li v-on:click="logout()">Se déconnecter</li>
                             </ul>
                         </div>
@@ -68,6 +78,7 @@
             <div class="open" v-bind:style="{ opacity: showMenu ? 0 : 1 }">
                 <font-awesome-icon class="icon" :icon="['fas', 'bars']" />
             </div>
+
             <div class="close" v-bind:style="{ opacity: showMenu ? 1 : 0 }">
                 <font-awesome-icon class="icon" :icon="['fas', 'xmark']" />
             </div>

@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Company;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-class OffersFactory extends Factory
+class CompanyFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,18 +14,12 @@ class OffersFactory extends Factory
      */
     public function definition()
     {
-        $this->faker = \Faker\Factory::create('fr_FR');
-        $company = Company::all()->random();
-
         return [
-            'title' => $this->faker->jobTitle(),
-            'postedBy' => $company->id,
-            'company' => $company->name,
-            'location' => $this->faker->city(),
-            'description' => $this->faker->realTextBetween(50,300, 2),
-            'type' => rand(0, 3),
-            'views' => rand(0, 500),
-            'salary' => rand(20, 50) * 1000,
+            'name' => $this->faker->company(),
+            'email' => $this->faker->unique()->companyEmail(),
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
         ];
     }
 
