@@ -282,14 +282,14 @@ export default {
             }
 
             .company {
-                transform: translate(100%, 0);
+                transform: translate(100vw, 0);
                 position: absolute;
             }
         }
 
         &.company {
             .user {
-                transform: translate(-100%, 0);
+                transform: translate(-100vw, 0);
                 position: absolute;
             }
 
