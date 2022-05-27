@@ -1,9 +1,9 @@
 <template lang="">
     <section class="login-form">
         <h2>Connexion</h2>
+        <Switch v-model="form.type" :leftValue="{ label: 'Utilisateur', value: 'user' }" :rightValue="{ label: 'Entreprise', value: 'company' }" />
         <div class="wrapper">
-            <div class="row">
-                <Switch v-model="form.type" :leftValue="{ label: 'Utilisateur', value: 'user' }" :rightValue="{ label: 'Entreprise', value: 'company' }" />
+            <div class="column">
                 <div class="input">
                     <label for="email">Adresse email:</label
                     ><input type="email" id="email" name="email" placeholder="Adresse email" required v-model="form.email" v-on:keyup.enter="handleLogin()" />
@@ -118,7 +118,7 @@ export default {
         justify-content: center;
         gap: 0.5rem;
 
-        .row {
+        .column {
             display: flex;
             flex-direction: column;
             justify-content: center;

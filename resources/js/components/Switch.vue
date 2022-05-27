@@ -51,6 +51,7 @@ export default {
     overflow: hidden;
     padding: 6px;
     border-radius: 20px;
+    margin: 1rem auto;
 
     .container {
         display: flex;

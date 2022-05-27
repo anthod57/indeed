@@ -34774,17 +34774,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _components_Switch_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Switch.vue */ "./resources/js/components/Switch.vue");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "RegisterForm",
+  components: {
+    Switch: _components_Switch_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      form: {
+      userForm: {
         lastname: null,
         firstname: null,
         email: null,
-        password: null
+        password: null,
+        type: "user"
       },
-      error: ""
+      companyForm: {
+        name: null,
+        email: null,
+        password: null,
+        type: "company"
+      },
+      error: "",
+      type: ""
     };
   },
   mounted: function mounted() {},
@@ -34800,7 +34813,7 @@ __webpack_require__.r(__webpack_exports__);
         // GET request done, we now have the required xsrf-token.
         // Axios automatically manages the headers data for us, nothing more to do.
         // Send register request.
-        return axios.post("/register", _this.form);
+        return axios.post("/register", _this.type === "user" ? _this.userForm : _this.companyForm);
       }).then(function (response) {
         // Redirect to login page.
         _this.$router.push({
@@ -34812,26 +34825,47 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     validateForm: function validateForm() {
-      // Check if the email address provided by user is not in a correct format.
-      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,9})+$/.test(this.form.email) == false) {
-        this.error = "Veuillez entrer une adresse email valide.";
-        return false;
-      } // Check if the password, firstname and lastname provided by the user are empty.
+      if (this.type === "user") {
+        // Check if the email address provided by user is not in a correct format.
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,9})+$/.test(this.userForm.email) == false) {
+          this.error = "Veuillez entrer une adresse email valide.";
+          return false;
+        } // Check if the password, firstname and lastname provided by the user are empty.
 
 
-      if (!this.form.password) {
-        this.error = "Veuillez entrer un mot de passe.";
-        return false;
+        if (!this.userForm.password) {
+          this.error = "Veuillez entrer un mot de passe.";
+          return false;
+        }
+
+        if (!this.userForm.firstname) {
+          this.error = "Veuillez entrer un prénom.";
+          return false;
+        }
+
+        if (!this.userForm.lastname) {
+          this.error = "Veuillez entrer un nom.";
+          return false;
+        }
       }
 
-      if (!this.form.firstname) {
-        this.error = "Veuillez entrer un prénom.";
-        return false;
-      }
+      if (this.type === "company") {
+        // Check if the email address provided by user is not in a correct format.
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,9})+$/.test(this.companyForm.email) == false) {
+          this.error = "Veuillez entrer une adresse email valide.";
+          return false;
+        } // Check if the password, firstname and lastname provided by the user are empty.
 
-      if (!this.form.lastname) {
-        this.error = "Veuillez entrer un nom.";
-        return false;
+
+        if (!this.companyForm.password) {
+          this.error = "Veuillez entrer un mot de passe.";
+          return false;
+        }
+
+        if (!this.companyForm.name) {
+          this.error = "Veuillez entrer un nom d'entreprise.";
+          return false;
+        }
       }
 
       return true;
@@ -35265,7 +35299,7 @@ var _hoisted_3 = {
   "class": "wrapper"
 };
 var _hoisted_4 = {
-  "class": "row"
+  "class": "column"
 };
 var _hoisted_5 = {
   "class": "input"
@@ -35298,7 +35332,7 @@ var _hoisted_9 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Switch = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Switch");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Switch, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Switch, {
     modelValue: $data.form.type,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.form.type = $event;
@@ -35313,7 +35347,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }
   }, null, 8
   /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "email",
     id: "email",
     name: "email",
@@ -35796,127 +35830,239 @@ var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_3 = {
-  "class": "wrapper"
+  "class": "column user"
 };
 var _hoisted_4 = {
-  "class": "row"
-};
-var _hoisted_5 = {
   "class": "input"
 };
 
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "email"
+    "for": "userLastname"
   }, "Nom:", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_7 = {
+var _hoisted_6 = {
   "class": "input"
 };
 
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "email"
+    "for": "userFirstname"
   }, "Prénom:", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_9 = {
+var _hoisted_8 = {
   "class": "input"
 };
 
-var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "email"
+    "for": "userEmail"
   }, "Adresse email:", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_11 = {
+var _hoisted_10 = {
   "class": "input"
 };
 
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "password"
+    "for": "userPassword"
   }, "Mot de passe:", -1
   /* HOISTED */
   );
 });
 
+var _hoisted_12 = {
+  key: 0,
+  "class": "error"
+};
 var _hoisted_13 = {
+  "class": "column company"
+};
+var _hoisted_14 = {
+  "class": "input"
+};
+
+var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "companyName"
+  }, "Nom:", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_16 = {
+  "class": "input"
+};
+
+var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "companyEmail"
+  }, "Adresse email:", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_18 = {
+  "class": "input"
+};
+
+var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "companyPassword"
+  }, "Mot de passe:", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_20 = {
   key: 0,
   "class": "error"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  var _component_Switch = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Switch");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Switch, {
+    modelValue: $data.type,
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.type = $event;
+    }),
+    leftValue: {
+      label: 'Utilisateur',
+      value: 'user'
+    },
+    rightValue: {
+      label: 'Entreprise',
+      value: 'company'
+    }
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+      'wrapper user': $data.type === 'user',
+      'wrapper company': $data.type === 'company'
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
-    id: "lastname",
-    name: "lastname",
+    id: "userLastname",
+    name: "userLastname",
     placeholder: "Nom",
     required: "",
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $data.form.lastname = $event;
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.userForm.lastname = $event;
     }),
-    onKeyup: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+    onKeyup: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $options.handleRegister();
     }, ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.lastname]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.lastname]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
-    id: "firstname",
-    name: "firstname",
+    id: "userFirstname",
+    name: "userFirstname",
     placeholder: "Prénom",
     required: "",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.form.firstname = $event;
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.userForm.firstname = $event;
     }),
-    onKeyup: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+    onKeyup: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $options.handleRegister();
     }, ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.firstname]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.firstname]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "email",
-    id: "email",
-    name: "email",
+    id: "userEmail",
+    name: "userEmail",
     placeholder: "Adresse email",
     required: "",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.form.email = $event;
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+      return $data.userForm.email = $event;
     }),
-    onKeyup: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+    onKeyup: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $options.handleRegister();
     }, ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "password",
-    id: "password",
-    name: "password",
+    id: "userPassword",
+    name: "userPassword",
     placeholder: "Mot de passe",
     required: "",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return $data.form.password = $event;
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+      return $data.userForm.password = $event;
     }),
-    onKeyup: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+    onKeyup: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $options.handleRegister();
     }, ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.password]])]), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.error), 1
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.password]])]), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.error), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[8] || (_cache[8] = function ($event) {
+    onClick: _cache[9] || (_cache[9] = function ($event) {
       return $options.handleRegister();
     })
-  }, "S'inscrire")])])]);
+  }, "S'inscrire")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    id: "companyName",
+    name: "companyName",
+    placeholder: "Nom",
+    required: "",
+    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+      return $data.companyForm.name = $event;
+    }),
+    onKeyup: _cache[11] || (_cache[11] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+      return $options.handleRegister();
+    }, ["enter"]))
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.companyForm.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "email",
+    id: "companyEmail",
+    name: "companyEmail",
+    placeholder: "Adresse email",
+    required: "",
+    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+      return $data.companyForm.email = $event;
+    }),
+    onKeyup: _cache[13] || (_cache[13] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+      return $options.handleRegister();
+    }, ["enter"]))
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.companyForm.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "password",
+    id: "companyPassword",
+    name: "companyPassword",
+    placeholder: "Mot de passe",
+    required: "",
+    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+      return $data.companyForm.password = $event;
+    }),
+    onKeyup: _cache[15] || (_cache[15] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+      return $options.handleRegister();
+    }, ["enter"]))
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.companyForm.password]])]), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.error), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[16] || (_cache[16] = function ($event) {
+      return $options.handleRegister();
+    })
+  }, "S'inscrire")])], 2
+  /* CLASS */
+  )]);
 }
 
 /***/ }),
@@ -36593,7 +36739,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".login-form[data-v-12a98f72] {\n  width: 100%;\n  max-width: 800px;\n}\n.login-form h2[data-v-12a98f72] {\n  text-align: center;\n  font-weight: 600;\n  font-size: 2rem;\n}\n.login-form .wrapper[data-v-12a98f72] {\n  margin: 1rem 0;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  gap: 0.5rem;\n}\n.login-form .wrapper .row[data-v-12a98f72] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n.login-form .wrapper .row .input[data-v-12a98f72] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  gap: 0.5rem;\n}\n.login-form .wrapper .row .input input[data-v-12a98f72] {\n  font-size: 1rem;\n  padding: 0.5rem 1rem;\n  width: 100%;\n  max-width: 300px;\n  border-radius: 20px;\n  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5019607843);\n}\n.login-form .wrapper .error[data-v-12a98f72] {\n  color: red;\n  font-size: 0.8rem;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".login-form[data-v-12a98f72] {\n  width: 100%;\n  max-width: 800px;\n}\n.login-form h2[data-v-12a98f72] {\n  text-align: center;\n  font-weight: 600;\n  font-size: 2rem;\n}\n.login-form .wrapper[data-v-12a98f72] {\n  margin: 1rem 0;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  gap: 0.5rem;\n}\n.login-form .wrapper .column[data-v-12a98f72] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n.login-form .wrapper .column .input[data-v-12a98f72] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  gap: 0.5rem;\n}\n.login-form .wrapper .column .input input[data-v-12a98f72] {\n  font-size: 1rem;\n  padding: 0.5rem 1rem;\n  width: 100%;\n  max-width: 300px;\n  border-radius: 20px;\n  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5019607843);\n}\n.login-form .wrapper .error[data-v-12a98f72] {\n  color: red;\n  font-size: 0.8rem;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36689,7 +36835,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".register-form[data-v-7942be72] {\n  width: 100%;\n  max-width: 800px;\n}\n.register-form h2[data-v-7942be72] {\n  text-align: center;\n  font-weight: 600;\n  font-size: 2rem;\n}\n.register-form .wrapper[data-v-7942be72] {\n  margin: 1rem 0;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  gap: 0.5rem;\n}\n.register-form .wrapper .row[data-v-7942be72] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n.register-form .wrapper .row .input[data-v-7942be72] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  gap: 0.5rem;\n}\n.register-form .wrapper .row .input input[data-v-7942be72] {\n  font-size: 1rem;\n  padding: 0.5rem 1rem;\n  width: 100%;\n  max-width: 300px;\n  border-radius: 20px;\n  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5019607843);\n}\n.register-form .wrapper .error[data-v-7942be72] {\n  color: red;\n  font-size: 0.8rem;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".register-form[data-v-7942be72] {\n  width: 100%;\n  max-width: 800px;\n}\n.register-form h2[data-v-7942be72] {\n  text-align: center;\n  font-weight: 600;\n  font-size: 2rem;\n}\n.register-form .wrapper[data-v-7942be72] {\n  margin: 1rem 0;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  gap: 0.5rem;\n  position: relative;\n}\n.register-form .wrapper .column[data-v-7942be72] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n  transition: 0.5s all;\n}\n.register-form .wrapper .column .input[data-v-7942be72] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  gap: 0.5rem;\n}\n.register-form .wrapper .column .input input[data-v-7942be72] {\n  font-size: 1rem;\n  padding: 0.5rem 1rem;\n  width: 100%;\n  max-width: 300px;\n  border-radius: 20px;\n  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5019607843);\n}\n.register-form .wrapper .error[data-v-7942be72] {\n  color: red;\n  font-size: 0.8rem;\n}\n.register-form .wrapper.user .user[data-v-7942be72] {\n  transform: translate(0, 0);\n}\n.register-form .wrapper.user .company[data-v-7942be72] {\n  transform: translate(100%, 0);\n  position: absolute;\n}\n.register-form .wrapper.company .user[data-v-7942be72] {\n  transform: translate(-100%, 0);\n  position: absolute;\n}\n.register-form .wrapper.company .company[data-v-7942be72] {\n  transform: translate(0, 0);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36761,7 +36907,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".switch[data-v-65ccab5f] {\n  width: 200px;\n  height: 40px;\n  background-color: #f8f8fc;\n  border: #a4a4ab 1px solid;\n  box-shadow: 0px 0px 4px rgba(165, 165, 165, 0.5);\n  position: relative;\n  overflow: hidden;\n  padding: 6px;\n  border-radius: 20px;\n}\n.switch .container[data-v-65ccab5f] {\n  display: flex;\n  height: 100%;\n  width: 100%;\n  align-items: center;\n  justify-content: space-between;\n  text-align: center;\n}\n.switch .container .right[data-v-65ccab5f],\n.switch .container .left[data-v-65ccab5f] {\n  z-index: 1;\n  width: 50%;\n  cursor: pointer;\n  color: black;\n  transition: 0.5s all;\n}\n.switch .container .right.selected[data-v-65ccab5f],\n.switch .container .left.selected[data-v-65ccab5f] {\n  color: #f8f8fc;\n}\n.switch .selector[data-v-65ccab5f] {\n  z-index: 0;\n  position: absolute;\n  background-color: #505df1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  width: 50%;\n  transition: 0.5s all;\n}\n.switch .selector.right[data-v-65ccab5f] {\n  transform: translate(100%, 0);\n  border-radius: 0 20px 20px 0;\n}\n.switch .selector.left[data-v-65ccab5f] {\n  border-radius: 20px 0 0 20px;\n  transform: translate(0%, 0);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".switch[data-v-65ccab5f] {\n  width: 200px;\n  height: 40px;\n  background-color: #f8f8fc;\n  border: #a4a4ab 1px solid;\n  box-shadow: 0px 0px 4px rgba(165, 165, 165, 0.5);\n  position: relative;\n  overflow: hidden;\n  padding: 6px;\n  border-radius: 20px;\n  margin: 1rem auto;\n}\n.switch .container[data-v-65ccab5f] {\n  display: flex;\n  height: 100%;\n  width: 100%;\n  align-items: center;\n  justify-content: space-between;\n  text-align: center;\n}\n.switch .container .right[data-v-65ccab5f],\n.switch .container .left[data-v-65ccab5f] {\n  z-index: 1;\n  width: 50%;\n  cursor: pointer;\n  color: black;\n  transition: 0.5s all;\n}\n.switch .container .right.selected[data-v-65ccab5f],\n.switch .container .left.selected[data-v-65ccab5f] {\n  color: #f8f8fc;\n}\n.switch .selector[data-v-65ccab5f] {\n  z-index: 0;\n  position: absolute;\n  background-color: #505df1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  width: 50%;\n  transition: 0.5s all;\n}\n.switch .selector.right[data-v-65ccab5f] {\n  transform: translate(100%, 0);\n  border-radius: 0 20px 20px 0;\n}\n.switch .selector.left[data-v-65ccab5f] {\n  border-radius: 20px 0 0 20px;\n  transform: translate(0%, 0);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
