@@ -47,7 +47,7 @@
                     <div class="user-box" v-if="user">
                         <div class="user-picture">
                             <img
-                                :src="`/storage/images/${user.type === 'user' ? 'profiles' : 'companies'}/${user.id}.png`"
+                                :src="`/storage/images/${user.type === 'user' ? 'users' : 'companies'}/${user.id}.png`"
                                 @error="$event.target.src = '/images/default.png'"
                             />
                             <input type="file" ref="profilePicture" accept="image/*" @change="updateProfilePicture()" />

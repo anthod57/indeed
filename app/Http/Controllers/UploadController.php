@@ -14,7 +14,7 @@ class UploadController extends Controller
         
             // processing the uploaded image
             $avatar_name = User::find($request->user()->id)->id.'.png';
-            $avatar_path = $request->file('avatar')->storeAs('', $avatar_name, 'profile_pictures');
+            $avatar_path = $request->file('avatar')->storeAs($request->user()->type === "user" ? "users" : "companies", $avatar_name, 'profile_pictures');
             
             return response()->json([
                 'status'    =>  'success',

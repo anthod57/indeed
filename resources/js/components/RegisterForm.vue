@@ -262,6 +262,11 @@ export default {
                     max-width: 300px;
                     border-radius: 20px;
                     box-shadow: 0px 2px 2px #00000080;
+                    transition: 0.25s all;
+
+                    &:focus {
+                        transform: scale(1.05);
+                    }
                 }
             }
         }
