@@ -3,6 +3,7 @@
         <h2>Connexion</h2>
         <div class="wrapper">
             <div class="row">
+                <Switch v-model="form.type" :leftValue="{ label: 'Utilisateur', value: 'user' }" :rightValue="{ label: 'Entreprise', value: 'company' }" />
                 <div class="input">
                     <label for="email">Adresse email:</label
                     ><input type="email" id="email" name="email" placeholder="Adresse email" required v-model="form.email" v-on:keyup.enter="handleLogin()" />
@@ -27,12 +28,17 @@
 </template>
 
 <script>
+import Switch from "../components/Switch.vue";
+
 export default {
     name: "LoginForm",
+    components: {
+        Switch,
+    },
 
     data() {
         return {
-            form: { email: null, password: null },
+            form: { email: null, password: null, type: null },
             error: "",
         };
     },

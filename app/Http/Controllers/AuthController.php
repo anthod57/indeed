@@ -24,7 +24,7 @@ class AuthController extends Controller
         ]);
 
         // Log in as a company.
-        if (Auth::guard('company')->attempt($credentials, true)) {
+        if ($request->type === "company" && Auth::guard('company')->attempt($credentials, true)) {
             $request->session()->regenerate();
             $company = Auth::guard('company')->user();
  
@@ -32,7 +32,7 @@ class AuthController extends Controller
         }
  
         // Log in as an user.
-        if (Auth::attempt($credentials, true)) {
+        if ($request->type === "user" && Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
             $user = Auth::user();
 
