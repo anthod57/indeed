@@ -13,12 +13,12 @@
     
     @if (Auth::check())
         <script>
-            window.auth_user = @json(Auth::user())
+            window.auth_user = @json(Auth::user());
         </script>
     @else
         @if (Auth::guard('company')->check())
         <script>
-            window.auth_user = @json(Auth::guard('company')->user())
+            window.auth_user = @json(Auth::guard('company')->user());
         </script>
         @else
             <script>

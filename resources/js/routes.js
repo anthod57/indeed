@@ -50,4 +50,23 @@ export const routes = [
             next();
         }
     },
+
+    {
+        path: '/publier-une-annonce',
+        component: Register,
+        name: 'AddAnnounce',
+
+        // If user (company) is not logged in, redirect to login page.
+        beforeEnter: (to, from, next) => {
+            if (window.auth_user && window.auth_user.type !== "company") {
+                return next('/')
+            }
+
+            if (!window.auth_user) {
+                return next('/register');
+            }
+
+            next();
+        }
+    },
 ]

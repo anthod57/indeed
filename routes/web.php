@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CompanyAuthController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
 
@@ -28,9 +27,5 @@ Route::get('/{vue_capture?}', function () {
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 Route::post('/register', [AuthController::class, 'register']);
-
-Route::post('/company/login', [CompanyAuthController::class, 'authenticate']);
-Route::middleware('auth:sanctum')->post('/company/logout', [CompanyAuthController::class, 'logout']);
-Route::post('/company/register', [CompanyAuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->post('/upload_profile_picture', [UploadController::class, 'upload']);

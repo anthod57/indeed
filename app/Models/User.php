@@ -49,4 +49,11 @@ class User extends Authenticatable
             "jobs": []
         }'
     ];
+
+    protected $appends = array('type');
+
+    public function getTypeAttribute()
+    {
+        return "user";
+    }
 }

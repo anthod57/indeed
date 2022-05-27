@@ -46,13 +46,16 @@
                     <!-- If user logged in -->
                     <div class="user-box" v-if="user">
                         <div class="user-picture">
-                            <img :src="`/storage/images/profiles/${user.id}.png`" @error="$event.target.src = '/images/default.png'" />
+                            <img
+                                :src="`/storage/images/${user.type === 'user' ? 'profiles' : 'companies'}/${user.id}.png`"
+                                @error="$event.target.src = '/images/default.png'"
+                            />
                             <input type="file" ref="profilePicture" accept="image/*" @change="updateProfilePicture()" />
                         </div>
 
                         <div class="user-infos">
-                            <span class="display-name">{{ user.lastname }} {{ user.firstname }}</span>
-                            <span>{{ user.job }}</span>
+                            <span class="display-name">{{ user.type === "user" ? user.lastname + " " + user.firstname : user.name }}</span>
+                            <span>{{ user.type === "user" ? user.job : "Entreprise" }}</span>
                         </div>
 
                         <div class="user-more" v-on:click="showMoreMenu = !showMoreMenu">
@@ -111,7 +114,7 @@ export default {
         logout() {
             axios
                 .post("/logout")
-                .then(() => {
+                .then((r) => {
                     // Clear user Vuex state and refresh the page.
                     this.$store.commit("setUser", null);
                     this.$router.go();

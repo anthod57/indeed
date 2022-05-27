@@ -30,6 +30,14 @@ class Company extends Authenticatable
     protected $attributes = [
         'posted' => '{
             "offers": []
-        }'
+        }',
     ];
+
+    protected $appends = array('type');
+
+    public function getTypeAttribute()
+    {
+        return "company";
+    }
+
 }

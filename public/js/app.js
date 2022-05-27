@@ -34658,7 +34658,7 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       var _this = this;
 
-      axios.post("/logout").then(function () {
+      axios.post("/logout").then(function (r) {
         // Clear user Vuex state and refresh the page.
         _this.$store.commit("setUser", null);
 
@@ -35446,7 +35446,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" If user logged in "), $options.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: "/storage/images/profiles/".concat($options.user.id, ".png"),
+    src: "/storage/images/".concat($options.user.type === 'user' ? 'profiles' : 'companies', "/").concat($options.user.id, ".png"),
     onError: _cache[0] || (_cache[0] = function ($event) {
       return $event.target.src = '/images/default.png';
     })
@@ -35461,9 +35461,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.lastname) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.firstname), 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.type === "user" ? $options.user.lastname + " " + $options.user.firstname : $options.user.name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.job), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.user.type === "user" ? $options.user.job : "Entreprise"), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "user-more",
@@ -36384,6 +36384,22 @@ var routes = [{
   beforeEnter: function beforeEnter(to, from, next) {
     if (window.auth_user) {
       return next('/');
+    }
+
+    next();
+  }
+}, {
+  path: '/publier-une-annonce',
+  component: _pages_Register__WEBPACK_IMPORTED_MODULE_2__["default"],
+  name: 'AddAnnounce',
+  // If user (company) is not logged in, redirect to login page.
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (window.auth_user && window.auth_user.type !== "company") {
+      return next('/');
+    }
+
+    if (!window.auth_user) {
+      return next('/register');
     }
 
     next();
