@@ -2,6 +2,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
+import PostAd from './pages/PostAd';
 
 export const routes = [
     {
@@ -53,8 +54,8 @@ export const routes = [
 
     {
         path: '/publier-une-annonce',
-        component: Register,
-        name: 'AddAnnounce',
+        component: PostAd,
+        name: 'PostAd',
 
         // If user (company) is not logged in, redirect to login page.
         beforeEnter: (to, from, next) => {
@@ -63,7 +64,7 @@ export const routes = [
             }
 
             if (!window.auth_user) {
-                return next('/register');
+                return next({ name: 'Login', params: { defaultType: 'company', redirect: 'PostAd' } });
             }
 
             next();

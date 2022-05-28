@@ -25,7 +25,7 @@
                             <li><font-awesome-icon class="icon" :icon="['fas', 'calculator']" />Estimation de salaire</li>
                         </router-link>
 
-                        <router-link to="/publier-une-annonce">
+                        <router-link to="/publier-une-annonce" v-if="!user || user.type === 'company'">
                             <li><font-awesome-icon class="icon" :icon="['fas', 'bullhorn']" />Publier une annonce</li>
                         </router-link>
                     </ul>
@@ -196,6 +196,7 @@ a:focus {
             display: flex;
             justify-content: center;
             align-items: center;
+            font-weight: 600;
 
             h2 {
                 text-align: center;

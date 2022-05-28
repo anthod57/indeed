@@ -1,9 +1,14 @@
 <template lang="">
     <section class="register-form">
         <h2>Inscription</h2>
-        <Switch v-model="type" :leftValue="{ label: 'Utilisateur', value: 'user' }" :rightValue="{ label: 'Entreprise', value: 'company' }" />
+        <Switch
+            v-model="type"
+            :defaultSide="$route.params.defaultType === 'company' ? 1 : -1"
+            :leftValue="{ label: 'Utilisateur', value: 'user' }"
+            :rightValue="{ label: 'Entreprise', value: 'company' }"
+        />
         <div v-bind:class="{ 'wrapper user': type === 'user', 'wrapper company': type === 'company' }">
-            <div class="column user">
+            <form action="" name="userRegister" id="userRegister" class="user">
                 <div class="input">
                     <label for="userLastname">Nom:</label>
                     <input
@@ -57,10 +62,10 @@
                 </div>
 
                 <span class="error" v-if="error">{{ error }}</span>
-                <button v-on:click="handleRegister()">S'inscrire</button>
-            </div>
+                <button type="button" v-on:click="handleRegister()">S'inscrire</button>
+            </form>
 
-            <div class="column company">
+            <form action="" name="companyRegister" id="companyRegister" class="company">
                 <div class="input">
                     <label for="companyName">Nom:</label>
                     <input
@@ -102,7 +107,7 @@
 
                 <span class="error" v-if="error">{{ error }}</span>
                 <button v-on:click="handleRegister()">S'inscrire</button>
-            </div>
+            </form>
         </div>
     </section>
 </template>
@@ -139,8 +144,6 @@ export default {
             type: "",
         };
     },
-
-    mounted() {},
 
     methods: {
         handleRegister() {
@@ -239,41 +242,13 @@ export default {
         gap: 0.5rem;
         position: relative;
 
-        .column {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            gap: 1rem;
-            transition: 0.5s all;
-
-            .input {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-                gap: 0.5rem;
-
-                input {
-                    font-size: 1rem;
-                    padding: 0.5rem 1rem;
-                    width: 100%;
-                    max-width: 300px;
-                    border-radius: 20px;
-                    box-shadow: 0px 2px 2px #00000080;
-                    transition: 0.25s all;
-
-                    &:focus {
-                        transform: scale(1.05);
-                    }
-                }
-            }
-        }
-
         .error {
             color: red;
             font-size: 0.8rem;
+        }
+
+        form {
+            transition: 0.5s all;
         }
 
         &.user {

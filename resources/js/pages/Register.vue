@@ -22,31 +22,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/app.css";
-
 main {
-    display: flex;
-    height: 100%;
-    align-items: flex-start;
-    justify-content: space-between;
     width: 75vw;
-    overflow: hidden;
-    margin: 0;
 }
 
 .page {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: calc(100%);
-    flex-grow: 1;
-    padding: 0 2vw;
-}
-
-@media screen and (max-width: 1024px) {
-    main {
-        width: 100%;
-    }
+    height: 100%;
+    margin-top: 0;
 }
 </style>

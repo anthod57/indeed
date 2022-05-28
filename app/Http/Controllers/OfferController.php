@@ -86,13 +86,14 @@ class OfferController extends Controller
     {
         $newOffer = new Offers;
         $newOffer -> title = $request -> offer['title'];
+        $newOffer -> postedBy = $request -> offer['postedBy'];
         $newOffer -> company = $request -> offer['company'];
         $newOffer -> type = $request -> offer['type'];
         $newOffer -> location = $request -> offer['location'];
         $newOffer -> salary = $request -> offer['salary'];
         $newOffer -> description = $request -> offer['description'];
+        $newOffer -> views = $request -> offer['views'];
         $newOffer -> save();
-
         return $newOffer;
     }
 

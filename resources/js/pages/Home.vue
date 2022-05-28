@@ -7,21 +7,10 @@
                 'page search-bar-focused': searchBarFocused,
             }"
         >
-            <Searchbar
-                @setOffers="updateOffers($event)"
-                @focused="searchBarFocused = $event"
-            ></Searchbar>
-            <OffersContainer
-                :offers="offers"
-                @setActiveOffer="updateActiveOffer($event)"
-                @sortOffers="sortOffers($event)"
-            ></OffersContainer>
+            <Searchbar @setOffers="updateOffers($event)" @focused="searchBarFocused = $event"></Searchbar>
+            <OffersContainer :offers="offers" @setActiveOffer="updateActiveOffer($event)" @sortOffers="sortOffers($event)"></OffersContainer>
         </div>
-        <Sidebar
-            :offer="offers[activeOffer]"
-            :show="showSidebar"
-            @setSidebarShow="setSidebarShow($event)"
-        />
+        <Sidebar :offer="offers[activeOffer]" :show="showSidebar" @setSidebarShow="setSidebarShow($event)" />
     </main>
 </template>
 
@@ -32,6 +21,7 @@ import OffersContainer from "../components/OffersContainer.vue";
 import Sidebar from "../components/Sidebar.vue";
 import axios from "axios";
 import moment from "moment";
+
 export default {
     components: {
         Navbar,
@@ -66,8 +56,7 @@ export default {
         async getLastOffers() {
             // Get offers based on user last search keywords if there are any, else get last offers. (USING VUEX PERSISTANT STORE)
             if (this.$store.getters.getCurrentSearchInput) {
-                const keywordsArray =
-                    this.$store.getters.getCurrentSearchInput.split(" ");
+                const keywordsArray = this.$store.getters.getCurrentSearchInput.split(" ");
 
                 const data = await axios
                     .request({
@@ -111,19 +100,11 @@ export default {
 
             switch (value) {
                 case 0: // Newest
-                    this.offers = this.offers.sort(
-                        (a, b) =>
-                            moment(b.updated_at).unix() -
-                            moment(a.updated_at).unix()
-                    );
+                    this.offers = this.offers.sort((a, b) => moment(b.updated_at).unix() - moment(a.updated_at).unix());
                     break;
 
                 case 1: // Oldest
-                    this.offers = this.offers.sort(
-                        (a, b) =>
-                            moment(a.updated_at).unix() -
-                            moment(b.updated_at).unix()
-                    );
+                    this.offers = this.offers.sort((a, b) => moment(a.updated_at).unix() - moment(b.updated_at).unix());
                     break;
 
                 case 2: // Most viewed
@@ -140,39 +121,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/app.css";
-
-main {
-    display: flex;
-    height: 100%;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 75vw;
-    overflow: hidden;
-    margin: 0;
-}
-
-.page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: calc(100% - 5rem);
-    flex-grow: 1;
-    margin-top: 5rem;
-    padding: 0 2vw;
-}
-
 @media screen and (max-width: 1024px) {
-    main {
-        width: 100%;
-    }
-
     .page {
-        height: 100%;
-        margin-top: 0;
-        transition: 0.5s all;
-
         &.search-bar-focused {
             margin-top: 3.5rem;
         }

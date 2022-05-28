@@ -10,6 +10,7 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="{{ asset( mix('js/app.js')) }}" type="text/javascript" defer></script>
+    <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}"/>
     
     @if (Auth::check())
         <script>

@@ -1,9 +1,14 @@
 <template lang="">
     <section class="login-form">
         <h2>Connexion</h2>
-        <Switch v-model="form.type" :leftValue="{ label: 'Utilisateur', value: 'user' }" :rightValue="{ label: 'Entreprise', value: 'company' }" />
+        <Switch
+            :defaultSide="$route.params.defaultType === 'company' ? 1 : -1"
+            v-model="form.type"
+            :leftValue="{ label: 'Utilisateur', value: 'user' }"
+            :rightValue="{ label: 'Entreprise', value: 'company' }"
+        />
         <div class="wrapper">
-            <div class="column">
+            <form action="" name="login" id="login">
                 <div class="input">
                     <label for="email">Adresse email:</label
                     ><input type="email" id="email" name="email" placeholder="Adresse email" required v-model="form.email" v-on:keyup.enter="handleLogin()" />
@@ -21,8 +26,8 @@
                     />
                 </div>
                 <span class="error" v-if="error">{{ error }}</span>
-                <button v-on:click="handleLogin()">Se connecter</button>
-            </div>
+                <button type="button" v-on:click="handleLogin()">Se connecter</button>
+            </form>
         </div>
     </section>
 </template>
@@ -67,7 +72,7 @@ export default {
                     // Then redirect to the hompage.
                     window.auth_user = response.data;
                     this.$store.commit("setUser", response.data);
-                    this.$router.push({ name: "Home" });
+                    this.$router.push({ name: this.$route.params.redirect ? this.$route.params.redirect : "Home" });
                 })
                 .catch((error) => {
                     if (error.response.status === 401) {
@@ -117,37 +122,6 @@ export default {
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
-
-        .column {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            gap: 1rem;
-
-            .input {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-                gap: 0.5rem;
-
-                input {
-                    font-size: 1rem;
-                    padding: 0.5rem 1rem;
-                    width: 100%;
-                    max-width: 300px;
-                    border-radius: 20px;
-                    box-shadow: 0px 2px 2px #00000080;
-                    transition: 0.25s all;
-
-                    &:focus {
-                        transform: scale(1.05);
-                    }
-                }
-            }
-        }
 
         .error {
             color: red;

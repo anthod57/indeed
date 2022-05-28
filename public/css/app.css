@@ -17,16 +17,13 @@ body {
     color: black;
     background: #f1f1fc;
     transition: color 0.5s, background-color 0.5s;
-    font-family: "Nunito";
+    font-family: "Nunito" !important;
     font-size: 16px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
     display: flex;
-}
-
-main {
 }
 
 input:focus,
@@ -36,15 +33,15 @@ select:focus {
 }
 
 ::-moz-placeholder {
-    color: #00000080;
+    color: rgba(0, 0, 0, 0.5019607843);
 }
 
 :-ms-input-placeholder {
-    color: #00000080;
+    color: rgba(0, 0, 0, 0.5019607843);
 }
 
 ::placeholder {
-    color: #00000080;
+    color: rgba(0, 0, 0, 0.5019607843);
 }
 
 /* width */
@@ -68,7 +65,25 @@ select:focus {
     background: #6471ff;
 }
 
-.v-select {
+main {
+    display: flex;
+    height: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 75vw;
+    overflow: hidden;
+    margin: 0;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: calc(100% - 5rem);
+    flex-grow: 1;
+    margin-top: 5rem;
+    padding: 0 2vw;
 }
 
 .vs__dropdown-toggle {
@@ -101,12 +116,8 @@ button {
     width: 100%;
     padding: 1rem 2rem;
     border-radius: 20px;
-    background-color: rgba(153, 167, 237, 1);
-    background-image: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(80, 93, 241, 1) 80%
-    );
+    background-color: rgb(153, 167, 237);
+    background-image: linear-gradient(90deg, transparent 0%, rgb(80, 93, 241) 80%);
     color: white;
     font-weight: 600;
     font-size: 1rem;
@@ -116,12 +127,72 @@ button {
 }
 
 button:active {
-    background-color: rgba(80, 93, 241, 1);
+    background-color: rgb(80, 93, 241);
 }
 
-@media screen and (min-width: 1024px) {
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+form .input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+form .input input {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5019607843);
+    transition: 0.25s all;
+}
+
+form .input input:focus {
+    transform: scale(1.05);
+}
+
+form .input textarea {
+    font-family: "Nunito";
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 600px;
+    resize: none;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5019607843);
+    transition: 0.25s all;
+}
+
+form .input textarea:focus {
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 1024px) {
     body {
         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main {
+        width: 100%;
+    }
+
+    .page {
+        margin-top: 0;
+        transition: 0.5s all;
+        height: 100%;
     }
 }
 

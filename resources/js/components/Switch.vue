@@ -15,7 +15,7 @@
 <script>
 export default {
     name: "Switch",
-    props: ["rightValue", "leftValue"],
+    props: ["rightValue", "leftValue", "defaultSide"],
 
     data() {
         return {
@@ -25,7 +25,8 @@ export default {
     },
 
     mounted() {
-        this.currentValue = this.leftValue.value;
+        this.currentValue = this.defaultSide === 1 ? this.rightValue.value : this.leftValue.value;
+        this.selectorSide = this.defaultSide ? this.defaultSide : -1;
         this.$emit("update:modelValue", this.currentValue);
     },
 
