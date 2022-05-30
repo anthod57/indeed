@@ -10,7 +10,9 @@
         </div>
         <div class="sidebar-wrapper" v-if="offer">
             <div class="header">
-                <div class="company-picture"></div>
+                <div class="company-picture">
+                    <img ref="companyPicture" :src="'/images/default.png'" @error="$event.target.src = '/images/default.png'" />
+                </div>
                 <h3>{{ offer.title }}</h3>
                 <div class="row">
                     <span>{{ offer.company }}</span>
@@ -53,6 +55,14 @@ export default {
 
         handleSidebar() {
             this.$emit("setSidebarShow", !this.show);
+        },
+    },
+
+    watch: {
+        offer: function (value) {
+            this.$nextTick(() => {
+                this.$refs.companyPicture.src = `/storage/images/companies/${this.offer.postedBy}.png`;
+            });
         },
     },
 };
@@ -118,9 +128,15 @@ export default {
             min-width: 25px;
             max-width: 300px;
             aspect-ratio: 1/1;
-            border: 1px solid black;
             border-radius: 20px;
+            overflow: hidden;
             margin: 1rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
 
         h3 {
