@@ -54,6 +54,11 @@ export default {
             // Mark current offer as viewed by user.
             if (!this.isViewed(this.offers[index].id)) {
                 this.$store.commit("addViewedOffer", this.offers[index].id);
+
+                // Increment offer view count
+                axios
+                    .put(`/api/offers/${this.offers[index].id}`, { offer: { views: this.offers[index].views + 1 } })
+                    .catch((error) => console.log(error.response));
             }
         },
 

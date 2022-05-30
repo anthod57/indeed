@@ -100,11 +100,11 @@ export default {
 
             switch (value) {
                 case 0: // Newest
-                    this.offers = this.offers.sort((a, b) => moment(b.updated_at).unix() - moment(a.updated_at).unix());
+                    this.offers = this.offers.sort((a, b) => moment(b.created_at).unix() - moment(a.created_at).unix());
                     break;
 
                 case 1: // Oldest
-                    this.offers = this.offers.sort((a, b) => moment(a.updated_at).unix() - moment(b.updated_at).unix());
+                    this.offers = this.offers.sort((a, b) => moment(a.created_at).unix() - moment(b.created_at).unix());
                     break;
 
                 case 2: // Most viewed

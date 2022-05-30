@@ -16,10 +16,6 @@
                             {{ data.views }}
                         </span>
                     </div>
-                    <div class="row">
-                        <span>Location</span>
-                        <span>Views</span>
-                    </div>
                 </div>
             </div>
 
