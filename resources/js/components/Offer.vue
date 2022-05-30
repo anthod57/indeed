@@ -2,7 +2,9 @@
     <div v-bind:class="{ 'offer active': isActive, offer: !isActive }" v-bind:style="{ backgroundColor: isViewed ? '#e4e4e8' : '' }">
         <div class="wrapper">
             <div class="company-infos">
-                <div class="company-picture"></div>
+                <div class="company-picture">
+                    <img ref="companyPicture" :src="'/images/default.png'" @error="$event.target.src = '/images/default.png'" />
+                </div>
                 <div class="infos">
                     <h2>{{ data.company }}</h2>
                     <h3>{{ data.title }}</h3>
@@ -37,6 +39,10 @@ export default {
     name: "Offer",
 
     props: ["data", "isActive", "isViewed"],
+
+    mounted() {
+        this.$refs.companyPicture.src = `/storage/images/companies/${this.data.postedBy}.png`;
+    },
 };
 </script>
 
@@ -70,8 +76,14 @@ export default {
             min-width: 25px;
             max-width: 100px;
             aspect-ratio: 1/1;
-            border: 1px solid black;
             border-radius: 20px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
 
         .company-infos {

@@ -46,10 +46,7 @@
                     <!-- If user logged in -->
                     <div class="user-box" v-if="user">
                         <div class="user-picture">
-                            <img
-                                :src="`/storage/images/${user.type === 'user' ? 'users' : 'companies'}/${user.id}.png`"
-                                @error="$event.target.src = '/images/default.png'"
-                            />
+                            <img ref="userPicture" :src="'/images/default.png'" @error="$event.target.src = '/images/default.png'" />
                             <input type="file" ref="profilePicture" accept="image/*" @change="updateProfilePicture()" />
                         </div>
 
@@ -108,6 +105,10 @@ export default {
         user() {
             return this.$store.getters.getUser;
         },
+    },
+
+    mounted() {
+        this.$refs.userPicture.src = `/storage/images/${this.user.type === "user" ? "users" : "companies"}/${this.user.id}.png`;
     },
 
     methods: {
